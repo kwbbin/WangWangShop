@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wangwang.shop.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.Goods" >
+    <id column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="goods_number" property="goodsNumber" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="CHAR" />
+    <result column="goods_sort_id" property="goodsSortId" jdbcType="INTEGER" />
+    <result column="collected" property="collected" jdbcType="INTEGER" />
+    <result column="goods_stock" property="goodsStock" jdbcType="INTEGER" />
+    <result column="is_sale" property="isSale" jdbcType="INTEGER" />
+    <result column="is_hot" property="isHot" jdbcType="INTEGER" />
+    <result column="is_new" property="isNew" jdbcType="INTEGER" />
+    <result column="goods_desc" property="goodsDesc" jdbcType="CHAR" />
+    <result column="sale_total" property="saleTotal" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="sale_date" property="saleDate" jdbcType="TIMESTAMP" />
+    <result column="visit_num" property="visitNum" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goods_id, goods_number, name, goods_sort_id, collected, goods_stock, is_sale, is_hot, 
+    is_new, goods_desc, sale_total, price, sale_date, visit_num, create_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from goods
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.GoodsExample" >
+    delete from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wangwang.shop.bean.Goods" >
+    insert into goods (goods_id, goods_number, name, 
+      goods_sort_id, collected, goods_stock, 
+      is_sale, is_hot, is_new, 
+      goods_desc, sale_total, price, 
+      sale_date, visit_num, create_date
+      )
+    values (#{goodsId,jdbcType=BIGINT}, #{goodsNumber,jdbcType=CHAR}, #{name,jdbcType=CHAR}, 
+      #{goodsSortId,jdbcType=INTEGER}, #{collected,jdbcType=INTEGER}, #{goodsStock,jdbcType=INTEGER}, 
+      #{isSale,jdbcType=INTEGER}, #{isHot,jdbcType=INTEGER}, #{isNew,jdbcType=INTEGER}, 
+      #{goodsDesc,jdbcType=CHAR}, #{saleTotal,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
+      #{saleDate,jdbcType=TIMESTAMP}, #{visitNum,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsNumber != null" >
+        goods_number,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="goodsSortId != null" >
+        goods_sort_id,
+      </if>
+      <if test="collected != null" >
+        collected,
+      </if>
+      <if test="goodsStock != null" >
+        goods_stock,
+      </if>
+      <if test="isSale != null" >
+        is_sale,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="isNew != null" >
+        is_new,
+      </if>
+      <if test="goodsDesc != null" >
+        goods_desc,
+      </if>
+      <if test="saleTotal != null" >
+        sale_total,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="saleDate != null" >
+        sale_date,
+      </if>
+      <if test="visitNum != null" >
+        visit_num,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="goodsSortId != null" >
+        #{goodsSortId,jdbcType=INTEGER},
+      </if>
+      <if test="collected != null" >
+        #{collected,jdbcType=INTEGER},
+      </if>
+      <if test="goodsStock != null" >
+        #{goodsStock,jdbcType=INTEGER},
+      </if>
+      <if test="isSale != null" >
+        #{isSale,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="isNew != null" >
+        #{isNew,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDesc != null" >
+        #{goodsDesc,jdbcType=CHAR},
+      </if>
+      <if test="saleTotal != null" >
+        #{saleTotal,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="saleDate != null" >
+        #{saleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNum != null" >
+        #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wangwang.shop.bean.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update goods
+    <set >
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsNumber != null" >
+        goods_number = #{record.goodsNumber,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=CHAR},
+      </if>
+      <if test="record.goodsSortId != null" >
+        goods_sort_id = #{record.goodsSortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collected != null" >
+        collected = #{record.collected,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsStock != null" >
+        goods_stock = #{record.goodsStock,jdbcType=INTEGER},
+      </if>
+      <if test="record.isSale != null" >
+        is_sale = #{record.isSale,jdbcType=INTEGER},
+      </if>
+      <if test="record.isHot != null" >
+        is_hot = #{record.isHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.isNew != null" >
+        is_new = #{record.isNew,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsDesc != null" >
+        goods_desc = #{record.goodsDesc,jdbcType=CHAR},
+      </if>
+      <if test="record.saleTotal != null" >
+        sale_total = #{record.saleTotal,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleDate != null" >
+        sale_date = #{record.saleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.visitNum != null" >
+        visit_num = #{record.visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update goods
+    set goods_id = #{record.goodsId,jdbcType=BIGINT},
+      goods_number = #{record.goodsNumber,jdbcType=CHAR},
+      name = #{record.name,jdbcType=CHAR},
+      goods_sort_id = #{record.goodsSortId,jdbcType=INTEGER},
+      collected = #{record.collected,jdbcType=INTEGER},
+      goods_stock = #{record.goodsStock,jdbcType=INTEGER},
+      is_sale = #{record.isSale,jdbcType=INTEGER},
+      is_hot = #{record.isHot,jdbcType=INTEGER},
+      is_new = #{record.isNew,jdbcType=INTEGER},
+      goods_desc = #{record.goodsDesc,jdbcType=CHAR},
+      sale_total = #{record.saleTotal,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      sale_date = #{record.saleDate,jdbcType=TIMESTAMP},
+      visit_num = #{record.visitNum,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangwang.shop.bean.Goods" >
+    update goods
+    <set >
+      <if test="goodsNumber != null" >
+        goods_number = #{goodsNumber,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="goodsSortId != null" >
+        goods_sort_id = #{goodsSortId,jdbcType=INTEGER},
+      </if>
+      <if test="collected != null" >
+        collected = #{collected,jdbcType=INTEGER},
+      </if>
+      <if test="goodsStock != null" >
+        goods_stock = #{goodsStock,jdbcType=INTEGER},
+      </if>
+      <if test="isSale != null" >
+        is_sale = #{isSale,jdbcType=INTEGER},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="isNew != null" >
+        is_new = #{isNew,jdbcType=INTEGER},
+      </if>
+      <if test="goodsDesc != null" >
+        goods_desc = #{goodsDesc,jdbcType=CHAR},
+      </if>
+      <if test="saleTotal != null" >
+        sale_total = #{saleTotal,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="saleDate != null" >
+        sale_date = #{saleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitNum != null" >
+        visit_num = #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangwang.shop.bean.Goods" >
+    update goods
+    set goods_number = #{goodsNumber,jdbcType=CHAR},
+      name = #{name,jdbcType=CHAR},
+      goods_sort_id = #{goodsSortId,jdbcType=INTEGER},
+      collected = #{collected,jdbcType=INTEGER},
+      goods_stock = #{goodsStock,jdbcType=INTEGER},
+      is_sale = #{isSale,jdbcType=INTEGER},
+      is_hot = #{isHot,jdbcType=INTEGER},
+      is_new = #{isNew,jdbcType=INTEGER},
+      goods_desc = #{goodsDesc,jdbcType=CHAR},
+      sale_total = #{saleTotal,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      sale_date = #{saleDate,jdbcType=TIMESTAMP},
+      visit_num = #{visitNum,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where goods_id = #{goodsId,jdbcType=BIGINT}
+  </update>
+</mapper>

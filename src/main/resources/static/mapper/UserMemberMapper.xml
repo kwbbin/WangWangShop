@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wangwang.shop.dao.StudentMapper" >
-  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.Student" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="CHAR" />
+<mapper namespace="com.wangwang.shop.dao.UserMemberMapper" >
+  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.UserMember" >
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,15 +63,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, sex
+    user_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.StudentExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.UserMemberExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from student
+    from user_member
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,68 +79,44 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from student
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from student
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_member
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.StudentExample" >
-    delete from student
+  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.UserMemberExample" >
+    delete from user_member
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.wangwang.shop.bean.Student" >
-    insert into student (id, name, sex)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.wangwang.shop.bean.UserMember" >
+    insert into user_member (user_id)
+    values (#{userId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.Student" >
-    insert into student
+  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.UserMember" >
+    insert into user_member
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="sex != null" >
-        sex,
+      <if test="userId != null" >
+        user_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=CHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.wangwang.shop.bean.StudentExample" resultType="java.lang.Integer" >
-    select count(*) from student
+  <select id="countByExample" parameterType="com.wangwang.shop.bean.UserMemberExample" resultType="java.lang.Integer" >
+    select count(*) from user_member
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update student
+    update user_member
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null" >
-        sex = #{record.sex,jdbcType=CHAR},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -150,30 +124,10 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update student
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=CHAR}
+    update user_member
+    set user_id = #{record.userId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wangwang.shop.bean.Student" >
-    update student
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=CHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.wangwang.shop.bean.Student" >
-    update student
-    set name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=CHAR}
-    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

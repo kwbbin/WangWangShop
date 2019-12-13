@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wangwang.shop.dao.CouponMapper" >
+  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.Coupon" >
+    <id column="coupon_id" property="couponId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="CHAR" />
+    <result column="get_price" property="getPrice" jdbcType="INTEGER" />
+    <result column="reach_price" property="reachPrice" jdbcType="INTEGER" />
+    <result column="date_start" property="dateStart" jdbcType="TIMESTAMP" />
+    <result column="date_end" property="dateEnd" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="desc" property="desc" jdbcType="CHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    coupon_id, name, get_price, reach_price, date_start, date_end, status, desc, create_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.CouponExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from coupon
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from coupon
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.CouponExample" >
+    delete from coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wangwang.shop.bean.Coupon" >
+    insert into coupon (coupon_id, name, get_price, 
+      reach_price, date_start, date_end, 
+      status, desc, create_date
+      )
+    values (#{couponId,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{getPrice,jdbcType=INTEGER}, 
+      #{reachPrice,jdbcType=INTEGER}, #{dateStart,jdbcType=TIMESTAMP}, #{dateEnd,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{desc,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.Coupon" >
+    insert into coupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        coupon_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="getPrice != null" >
+        get_price,
+      </if>
+      <if test="reachPrice != null" >
+        reach_price,
+      </if>
+      <if test="dateStart != null" >
+        date_start,
+      </if>
+      <if test="dateEnd != null" >
+        date_end,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="desc != null" >
+        desc,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="couponId != null" >
+        #{couponId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="getPrice != null" >
+        #{getPrice,jdbcType=INTEGER},
+      </if>
+      <if test="reachPrice != null" >
+        #{reachPrice,jdbcType=INTEGER},
+      </if>
+      <if test="dateStart != null" >
+        #{dateStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateEnd != null" >
+        #{dateEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wangwang.shop.bean.CouponExample" resultType="java.lang.Integer" >
+    select count(*) from coupon
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update coupon
+    <set >
+      <if test="record.couponId != null" >
+        coupon_id = #{record.couponId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=CHAR},
+      </if>
+      <if test="record.getPrice != null" >
+        get_price = #{record.getPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.reachPrice != null" >
+        reach_price = #{record.reachPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.dateStart != null" >
+        date_start = #{record.dateStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dateEnd != null" >
+        date_end = #{record.dateEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.desc != null" >
+        desc = #{record.desc,jdbcType=CHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update coupon
+    set coupon_id = #{record.couponId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=CHAR},
+      get_price = #{record.getPrice,jdbcType=INTEGER},
+      reach_price = #{record.reachPrice,jdbcType=INTEGER},
+      date_start = #{record.dateStart,jdbcType=TIMESTAMP},
+      date_end = #{record.dateEnd,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      desc = #{record.desc,jdbcType=CHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangwang.shop.bean.Coupon" >
+    update coupon
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="getPrice != null" >
+        get_price = #{getPrice,jdbcType=INTEGER},
+      </if>
+      <if test="reachPrice != null" >
+        reach_price = #{reachPrice,jdbcType=INTEGER},
+      </if>
+      <if test="dateStart != null" >
+        date_start = #{dateStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateEnd != null" >
+        date_end = #{dateEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        desc = #{desc,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangwang.shop.bean.Coupon" >
+    update coupon
+    set name = #{name,jdbcType=CHAR},
+      get_price = #{getPrice,jdbcType=INTEGER},
+      reach_price = #{reachPrice,jdbcType=INTEGER},
+      date_start = #{dateStart,jdbcType=TIMESTAMP},
+      date_end = #{dateEnd,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      desc = #{desc,jdbcType=CHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where coupon_id = #{couponId,jdbcType=INTEGER}
+  </update>
+</mapper>

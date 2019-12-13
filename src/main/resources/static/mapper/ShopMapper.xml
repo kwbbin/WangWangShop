@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wangwang.shop.dao.ShopMapper" >
+  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.Shop" >
+    <id column="shop_number" property="shopNumber" jdbcType="CHAR" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="shop_name" property="shopName" jdbcType="CHAR" />
+    <result column="shop_directo" property="shopDirecto" jdbcType="BIGINT" />
+    <result column="shop_image" property="shopImage" jdbcType="CHAR" />
+    <result column="shop_phone" property="shopPhone" jdbcType="CHAR" />
+    <result column="shop_qq" property="shopQq" jdbcType="CHAR" />
+    <result column="shop_adress" property="shopAdress" jdbcType="CHAR" />
+    <result column="service_time_begin" property="serviceTimeBegin" jdbcType="TIMESTAMP" />
+    <result column="service_time_end" property="serviceTimeEnd" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    shop_number, shop_id, shop_name, shop_directo, shop_image, shop_phone, shop_qq, shop_adress, 
+    service_time_begin, service_time_end, create_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.ShopExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop
+    where shop_number = #{shopNumber,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop
+    where shop_number = #{shopNumber,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.ShopExample" >
+    delete from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wangwang.shop.bean.Shop" >
+    insert into shop (shop_number, shop_id, shop_name, 
+      shop_directo, shop_image, shop_phone, 
+      shop_qq, shop_adress, service_time_begin, 
+      service_time_end, create_date)
+    values (#{shopNumber,jdbcType=CHAR}, #{shopId,jdbcType=INTEGER}, #{shopName,jdbcType=CHAR}, 
+      #{shopDirecto,jdbcType=BIGINT}, #{shopImage,jdbcType=CHAR}, #{shopPhone,jdbcType=CHAR}, 
+      #{shopQq,jdbcType=CHAR}, #{shopAdress,jdbcType=CHAR}, #{serviceTimeBegin,jdbcType=TIMESTAMP}, 
+      #{serviceTimeEnd,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.Shop" >
+    insert into shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopNumber != null" >
+        shop_number,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="shopDirecto != null" >
+        shop_directo,
+      </if>
+      <if test="shopImage != null" >
+        shop_image,
+      </if>
+      <if test="shopPhone != null" >
+        shop_phone,
+      </if>
+      <if test="shopQq != null" >
+        shop_qq,
+      </if>
+      <if test="shopAdress != null" >
+        shop_adress,
+      </if>
+      <if test="serviceTimeBegin != null" >
+        service_time_begin,
+      </if>
+      <if test="serviceTimeEnd != null" >
+        service_time_end,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopNumber != null" >
+        #{shopNumber,jdbcType=CHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=CHAR},
+      </if>
+      <if test="shopDirecto != null" >
+        #{shopDirecto,jdbcType=BIGINT},
+      </if>
+      <if test="shopImage != null" >
+        #{shopImage,jdbcType=CHAR},
+      </if>
+      <if test="shopPhone != null" >
+        #{shopPhone,jdbcType=CHAR},
+      </if>
+      <if test="shopQq != null" >
+        #{shopQq,jdbcType=CHAR},
+      </if>
+      <if test="shopAdress != null" >
+        #{shopAdress,jdbcType=CHAR},
+      </if>
+      <if test="serviceTimeBegin != null" >
+        #{serviceTimeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceTimeEnd != null" >
+        #{serviceTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wangwang.shop.bean.ShopExample" resultType="java.lang.Integer" >
+    select count(*) from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop
+    <set >
+      <if test="record.shopNumber != null" >
+        shop_number = #{record.shopNumber,jdbcType=CHAR},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopName != null" >
+        shop_name = #{record.shopName,jdbcType=CHAR},
+      </if>
+      <if test="record.shopDirecto != null" >
+        shop_directo = #{record.shopDirecto,jdbcType=BIGINT},
+      </if>
+      <if test="record.shopImage != null" >
+        shop_image = #{record.shopImage,jdbcType=CHAR},
+      </if>
+      <if test="record.shopPhone != null" >
+        shop_phone = #{record.shopPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.shopQq != null" >
+        shop_qq = #{record.shopQq,jdbcType=CHAR},
+      </if>
+      <if test="record.shopAdress != null" >
+        shop_adress = #{record.shopAdress,jdbcType=CHAR},
+      </if>
+      <if test="record.serviceTimeBegin != null" >
+        service_time_begin = #{record.serviceTimeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serviceTimeEnd != null" >
+        service_time_end = #{record.serviceTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop
+    set shop_number = #{record.shopNumber,jdbcType=CHAR},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      shop_name = #{record.shopName,jdbcType=CHAR},
+      shop_directo = #{record.shopDirecto,jdbcType=BIGINT},
+      shop_image = #{record.shopImage,jdbcType=CHAR},
+      shop_phone = #{record.shopPhone,jdbcType=CHAR},
+      shop_qq = #{record.shopQq,jdbcType=CHAR},
+      shop_adress = #{record.shopAdress,jdbcType=CHAR},
+      service_time_begin = #{record.serviceTimeBegin,jdbcType=TIMESTAMP},
+      service_time_end = #{record.serviceTimeEnd,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangwang.shop.bean.Shop" >
+    update shop
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=CHAR},
+      </if>
+      <if test="shopDirecto != null" >
+        shop_directo = #{shopDirecto,jdbcType=BIGINT},
+      </if>
+      <if test="shopImage != null" >
+        shop_image = #{shopImage,jdbcType=CHAR},
+      </if>
+      <if test="shopPhone != null" >
+        shop_phone = #{shopPhone,jdbcType=CHAR},
+      </if>
+      <if test="shopQq != null" >
+        shop_qq = #{shopQq,jdbcType=CHAR},
+      </if>
+      <if test="shopAdress != null" >
+        shop_adress = #{shopAdress,jdbcType=CHAR},
+      </if>
+      <if test="serviceTimeBegin != null" >
+        service_time_begin = #{serviceTimeBegin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceTimeEnd != null" >
+        service_time_end = #{serviceTimeEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where shop_number = #{shopNumber,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wangwang.shop.bean.Shop" >
+    update shop
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      shop_name = #{shopName,jdbcType=CHAR},
+      shop_directo = #{shopDirecto,jdbcType=BIGINT},
+      shop_image = #{shopImage,jdbcType=CHAR},
+      shop_phone = #{shopPhone,jdbcType=CHAR},
+      shop_qq = #{shopQq,jdbcType=CHAR},
+      shop_adress = #{shopAdress,jdbcType=CHAR},
+      service_time_begin = #{serviceTimeBegin,jdbcType=TIMESTAMP},
+      service_time_end = #{serviceTimeEnd,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where shop_number = #{shopNumber,jdbcType=CHAR}
+  </update>
+</mapper>

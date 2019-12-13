@@ -1,8 +1,8 @@
 package com.wangwang.shop.controller;
 
-import com.wangwang.shop.bean.Student;
-import com.wangwang.shop.bean.StudentExample;
-import com.wangwang.shop.dao.StudentMapper;
+import com.wangwang.shop.bean.Ad;
+import com.wangwang.shop.bean.AdExample;
+import com.wangwang.shop.dao.AdMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,14 +13,13 @@ import java.util.List;
 public class HelloWorld {
 
     @Autowired
-    StudentMapper studentMapper;
+    AdMapper adMapper;
 
     @RequestMapping("/hello")
-    public List<Student> helloWorld(){
-        StudentExample example=new StudentExample();
-        StudentExample.Criteria criteria = example.createCriteria();
-        List<Student> list=studentMapper.selectByExample(example);
-
+    public List<Ad> helloWorld(){
+        AdExample adExample = new AdExample();
+        adExample.createCriteria().andAdIdEqualTo(1);
+        List<Ad> list = adMapper.selectByExample(adExample);
         return list;
     }
 }

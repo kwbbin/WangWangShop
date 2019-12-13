@@ -17,7 +17,7 @@
 
         <!-- 数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/student?characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://localhost:3306/wangwangshop?characterEncoding=UTF-8"
                         userId="root"
                         password="19971207">
         </jdbcConnection>
@@ -58,8 +58,25 @@
         enableSelectByExample:Select多条语句中加入where条件查询，默认为true开启
         selectByExampleQueryId:Select单个对象语句中加入where条件查询，默认为true开启
         -->
-        <table tableName="student" domainObjectName="Student"/>
-        <table tableName="class" domainObjectName="MyClass"/>
+        <table tableName="ad" domainObjectName="Ad"/>
+<!--        <table tableName="admin" domainObjectName="Admin"/>-->
+<!--        <table tableName="coupon" domainObjectName="Coupon"/>-->
+<!--        <table tableName="goods" domainObjectName="Goods"/>-->
+<!--        <table tableName="goods_shop" domainObjectName="GoodsShop"/>-->
+<!--        <table tableName="goods_sort" domainObjectName="GoodsSort"/>-->
+<!--        <table tableName="goods_sort_one" domainObjectName="GoodsSortOne"/>-->
+<!--        <table tableName="goods_sort_one_two" domainObjectName="GoodsSortOneTwo"/>-->
+<!--        <table tableName="goods_sort_two" domainObjectName="GoodsSortTwo"/>-->
+<!--        <table tableName="images" domainObjectName="Images"/>-->
+<!--        <table tableName="images_goods" domainObjectName="ImagesGoods"/>-->
+<!--        <table tableName="message" domainObjectName="Message"/>-->
+<!--        <table tableName="message_images" domainObjectName="MessageImages"/>-->
+<!--        <table tableName="order" domainObjectName="Order"/>-->
+<!--        <table tableName="shop" domainObjectName="Shop"/>-->
+<!--        <table tableName="shopping_cart" domainObjectName="ShoppingCart"/>-->
+<!--        <table tableName="user" domainObjectName="User"/>-->
+<!--        <table tableName="user_coupon" domainObjectName="UserCoupon"/>-->
+<!--        <table tableName="user_member" domainObjectName="UserMember"/>-->
 <!--        <table tableName="class" domainObjectName="MyClass"-->
 <!--               enableCountByExample="false" enableUpdateByExample="false"-->
 <!--               enableDeleteByExample="false" enableSelectByExample="false"-->
