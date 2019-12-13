@@ -58,7 +58,7 @@
         enableSelectByExample:Select多条语句中加入where条件查询，默认为true开启
         selectByExampleQueryId:Select单个对象语句中加入where条件查询，默认为true开启
         -->
-        <table tableName="ad" domainObjectName="Ad"/>
+<!--        <table tableName="ad" domainObjectName="Ad"/>-->
 <!--        <table tableName="admin" domainObjectName="Admin"/>-->
 <!--        <table tableName="coupon" domainObjectName="Coupon"/>-->
 <!--        <table tableName="goods" domainObjectName="Goods"/>-->
@@ -75,6 +75,7 @@
 <!--        <table tableName="shop" domainObjectName="Shop"/>-->
 <!--        <table tableName="shopping_cart" domainObjectName="ShoppingCart"/>-->
 <!--        <table tableName="user" domainObjectName="User"/>-->
+        <table tableName="user_log" domainObjectName="UserLog"/>
 <!--        <table tableName="user_coupon" domainObjectName="UserCoupon"/>-->
 <!--        <table tableName="user_member" domainObjectName="UserMember"/>-->
 <!--        <table tableName="class" domainObjectName="MyClass"-->
