@@ -26,4 +26,6 @@ public class HelloWorld {
     public Ad helloWorld(){
         return adService.selectAds(1);
     }
+
+    
 }

@@ -8,4 +8,6 @@ public interface UserService {
     User getUserByLoginNamePas(String loginName, String password);
 
     boolean existLoginName(String loginName);
+
+    User getUserByLoginName(String loginName);
 }

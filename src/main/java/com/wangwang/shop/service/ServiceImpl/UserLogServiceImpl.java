@@ -1,9 +1,12 @@
 package com.wangwang.shop.service.ServiceImpl;
 
 
+import com.wangwang.shop.bean.User;
+import com.wangwang.shop.bean.UserExample;
 import com.wangwang.shop.bean.UserLog;
 import com.wangwang.shop.bean.UserLogExample;
 import com.wangwang.shop.dao.UserLogMapper;
+import com.wangwang.shop.dao.UserMapper;
 import com.wangwang.shop.service.UserLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +19,18 @@ import java.util.List;
 public class UserLogServiceImpl implements UserLogService {
     @Autowired
     UserLogMapper userLogMapper;
+
+    @Autowired
+    UserMapper userMapper;
     @Override
-    public Integer countNumLogin(Long id) {
+    public Integer countNumLogin(String loginName) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andLoginNameEqualTo(loginName);
+        List<User> li = userMapper.selectByExample(userExample);
+        Long id=-1L;
+        if (li.size()>0){
+            id = li.get(0).getUserId();
+        }
         Calendar cal=Calendar.getInstance();
         int y,m,d,h,mi,s;
         y=cal.get(Calendar.YEAR);
@@ -37,7 +50,7 @@ public class UserLogServiceImpl implements UserLogService {
     }
 
     @Override
-    public void insertStudentlog(Long id) {
+    public void insertUserLog(Long id) {
         UserLog userLog=new UserLog();
         userLog.setLoginDate(new Date());
         userLog.setLoginUser(id);
