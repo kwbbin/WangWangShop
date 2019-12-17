@@ -9,5 +9,9 @@ public interface UserService {
 
     boolean existLoginName(String loginName);
 
+    boolean existPhone(String phone);
+
     User getUserByLoginName(String loginName);
+
+    void insertUser(User user);
 }

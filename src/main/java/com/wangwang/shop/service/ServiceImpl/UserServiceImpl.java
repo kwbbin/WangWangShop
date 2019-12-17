@@ -8,6 +8,7 @@ import com.wangwang.shop.utils.MD5Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -49,6 +50,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean existPhone(String phone) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andPhoneEqualTo(phone);
+        List list = userMapper.selectByExample(userExample);
+        if (list.size()>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public User getUserByLoginName(String loginName) {
         UserExample userExample=new UserExample();
         userExample.createCriteria().andLoginNameEqualTo(loginName);
@@ -58,5 +70,11 @@ public class UserServiceImpl implements UserService {
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public void insertUser(User user) {
+        user.setRegisterdate(new Date());
+        userMapper.insert(user);
     }
 }

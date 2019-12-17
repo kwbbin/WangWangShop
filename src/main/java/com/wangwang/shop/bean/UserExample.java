@@ -1101,6 +1101,66 @@ public class UserExample {
             addCriterion("user_status not between", value1, value2, "userStatus");
             return (Criteria) this;
         }
+
+        public Criteria andRegisterdateIsNull() {
+            addCriterion("registerDate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateIsNotNull() {
+            addCriterion("registerDate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateEqualTo(Date value) {
+            addCriterion("registerDate =", value, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateNotEqualTo(Date value) {
+            addCriterion("registerDate <>", value, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateGreaterThan(Date value) {
+            addCriterion("registerDate >", value, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("registerDate >=", value, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateLessThan(Date value) {
+            addCriterion("registerDate <", value, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateLessThanOrEqualTo(Date value) {
+            addCriterion("registerDate <=", value, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateIn(List<Date> values) {
+            addCriterion("registerDate in", values, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateNotIn(List<Date> values) {
+            addCriterion("registerDate not in", values, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateBetween(Date value1, Date value2) {
+            addCriterion("registerDate between", value1, value2, "registerdate");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegisterdateNotBetween(Date value1, Date value2) {
+            addCriterion("registerDate not between", value1, value2, "registerdate");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

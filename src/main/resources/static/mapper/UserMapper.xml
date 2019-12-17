@@ -17,6 +17,7 @@
     <result column="user_form" property="userForm" jdbcType="INTEGER" />
     <result column="user_money" property="userMoney" jdbcType="INTEGER" />
     <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+    <result column="registerDate" property="registerdate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,7 +79,7 @@
   </sql>
   <sql id="Base_Column_List" >
     user_id, login_name, phone, password, sex, true_name, birthday, user_photo, user_qq, 
-    email, user_score, last_login_date, user_form, user_money, user_status
+    email, user_score, last_login_date, user_form, user_money, user_status, registerDate
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.UserExample" >
     select
@@ -115,14 +116,14 @@
       password, sex, true_name, 
       birthday, user_photo, user_qq, 
       email, user_score, last_login_date, 
-      user_form, user_money, user_status
-      )
+      user_form, user_money, user_status, 
+      registerDate)
     values (#{userId,jdbcType=BIGINT}, #{loginName,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, 
       #{password,jdbcType=CHAR}, #{sex,jdbcType=INTEGER}, #{trueName,jdbcType=CHAR}, 
       #{birthday,jdbcType=DATE}, #{userPhoto,jdbcType=CHAR}, #{userQq,jdbcType=CHAR}, 
       #{email,jdbcType=CHAR}, #{userScore,jdbcType=INTEGER}, #{lastLoginDate,jdbcType=TIMESTAMP}, 
-      #{userForm,jdbcType=INTEGER}, #{userMoney,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER}
-      )
+      #{userForm,jdbcType=INTEGER}, #{userMoney,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER}, 
+      #{registerdate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wangwang.shop.bean.User" >
     insert into user
@@ -172,6 +173,9 @@
       <if test="userStatus != null" >
         user_status,
       </if>
+      <if test="registerdate != null" >
+        registerDate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -218,6 +222,9 @@
       </if>
       <if test="userStatus != null" >
         #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="registerdate != null" >
+        #{registerdate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -275,6 +282,9 @@
       <if test="record.userStatus != null" >
         user_status = #{record.userStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.registerdate != null" >
+        registerDate = #{record.registerdate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -296,7 +306,8 @@
       last_login_date = #{record.lastLoginDate,jdbcType=TIMESTAMP},
       user_form = #{record.userForm,jdbcType=INTEGER},
       user_money = #{record.userMoney,jdbcType=INTEGER},
-      user_status = #{record.userStatus,jdbcType=INTEGER}
+      user_status = #{record.userStatus,jdbcType=INTEGER},
+      registerDate = #{record.registerdate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -346,6 +357,9 @@
       <if test="userStatus != null" >
         user_status = #{userStatus,jdbcType=INTEGER},
       </if>
+      <if test="registerdate != null" >
+        registerDate = #{registerdate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
@@ -364,7 +378,8 @@
       last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
       user_form = #{userForm,jdbcType=INTEGER},
       user_money = #{userMoney,jdbcType=INTEGER},
-      user_status = #{userStatus,jdbcType=INTEGER}
+      user_status = #{userStatus,jdbcType=INTEGER},
+      registerDate = #{registerdate,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

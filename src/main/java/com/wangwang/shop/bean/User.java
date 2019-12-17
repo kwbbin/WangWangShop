@@ -33,6 +33,8 @@ public class User {
 
     private Integer userStatus;
 
+    private Date registerdate;
+
     public Long getUserId() {
         return userId;
     }
@@ -151,5 +153,13 @@ public class User {
 
     public void setUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public Date getRegisterdate() {
+        return registerdate;
+    }
+
+    public void setRegisterdate(Date registerdate) {
+        this.registerdate = registerdate;
     }
 }

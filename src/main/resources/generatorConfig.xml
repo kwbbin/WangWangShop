@@ -75,9 +75,13 @@
 <!--        <table tableName="shop" domainObjectName="Shop"/>-->
 <!--        <table tableName="shopping_cart" domainObjectName="ShoppingCart"/>-->
 <!--        <table tableName="user" domainObjectName="User"/>-->
-        <table tableName="user_log" domainObjectName="UserLog"/>
+<!--        <table tableName="user_log" domainObjectName="UserLog"/>-->
 <!--        <table tableName="user_coupon" domainObjectName="UserCoupon"/>-->
 <!--        <table tableName="user_member" domainObjectName="UserMember"/>-->
+<!--        <table tableName="sms_code" domainObjectName="SMSCode"/>-->
+
+        <table tableName="user" domainObjectName="User"/>
+
 <!--        <table tableName="class" domainObjectName="MyClass"-->
 <!--               enableCountByExample="false" enableUpdateByExample="false"-->
 <!--               enableDeleteByExample="false" enableSelectByExample="false"-->
