@@ -32,9 +32,9 @@ public class SendSmsController extends BaseController {
         String phone = request1.getParameter("phone");
         String str = SMSCodeTools.getSMSCode();
 
-        if (!userService.existPhone(phone)){
-            return failed("手机号不存在！");
-        }
+//        if (!userService.existPhone(phone)){
+//            return failed("手机号不存在！");
+//        }
         if(!smsCodeService.updateSMSCode(str,phone)){
             return failed("你已经申请过验证码，请稍后再试");
         };

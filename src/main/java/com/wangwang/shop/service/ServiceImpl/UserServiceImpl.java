@@ -1,7 +1,11 @@
 package com.wangwang.shop.service.ServiceImpl;
 
+import com.wangwang.shop.bean.SMSCode;
+import com.wangwang.shop.bean.SMSCodeExample;
 import com.wangwang.shop.bean.User;
 import com.wangwang.shop.bean.UserExample;
+import com.wangwang.shop.bean.VO.UserVo;
+import com.wangwang.shop.dao.SMSCodeMapper;
 import com.wangwang.shop.dao.UserMapper;
 import com.wangwang.shop.service.UserService;
 import com.wangwang.shop.utils.MD5Tools;
@@ -15,6 +19,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    SMSCodeMapper smsCodeMapper;
 
     @Override
     public User getUser(Long id){
@@ -73,8 +80,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void insertUser(User user) {
-        user.setRegisterdate(new Date());
-        userMapper.insert(user);
+    public boolean insertUser(User user) {
+        return true;
+    }
+
+    @Override
+    public boolean insertUser(UserVo user) {
+        SMSCodeExample smsCodeExample = new SMSCodeExample();
+        smsCodeExample.createCriteria().andPhoneEqualTo(user.getPhone());
+        List<SMSCode> list = smsCodeMapper.selectByExample(smsCodeExample);
+        SMSCode smsCode = null;
+        if (list.size()>0){
+            smsCode = list.get(0);
+            Date date1 = smsCode.getDate();
+            Date date2 = new Date(date1.getTime()+5*60*1000);
+            Date date3 = new Date();
+            //判断验证码是否过期
+            if (date3.after(date2)||!user.getCode().equals(smsCode.getCode()))
+                return false;
+        }
+
+        if (smsCode!=null){
+            user.setRegisterdate(new Date());
+            userMapper.insert(user);
+        }else{
+            return false;
+        }
+        return true;
     }
 }

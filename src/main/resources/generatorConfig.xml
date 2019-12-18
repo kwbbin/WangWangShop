@@ -20,6 +20,7 @@
                         connectionURL="jdbc:mysql://localhost:3306/wangwangshop?characterEncoding=UTF-8"
                         userId="root"
                         password="19971207">
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
         <javaTypeResolver >
@@ -75,12 +76,12 @@
 <!--        <table tableName="shop" domainObjectName="Shop"/>-->
 <!--        <table tableName="shopping_cart" domainObjectName="ShoppingCart"/>-->
 <!--        <table tableName="user" domainObjectName="User"/>-->
-<!--        <table tableName="user_log" domainObjectName="UserLog"/>-->
+        <table tableName="user_log" domainObjectName="UserLog"/>
 <!--        <table tableName="user_coupon" domainObjectName="UserCoupon"/>-->
 <!--        <table tableName="user_member" domainObjectName="UserMember"/>-->
 <!--        <table tableName="sms_code" domainObjectName="SMSCode"/>-->
 
-        <table tableName="user" domainObjectName="User"/>
+<!--        <table tableName="user" domainObjectName="User"/>-->
 
 <!--        <table tableName="class" domainObjectName="MyClass"-->
 <!--               enableCountByExample="false" enableUpdateByExample="false"-->

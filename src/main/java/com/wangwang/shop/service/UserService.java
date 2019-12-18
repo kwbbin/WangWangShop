@@ -1,6 +1,7 @@
 package com.wangwang.shop.service;
 
 import com.wangwang.shop.bean.User;
+import com.wangwang.shop.bean.VO.UserVo;
 
 public interface UserService {
     User getUser(Long id);
@@ -13,5 +14,7 @@ public interface UserService {
 
     User getUserByLoginName(String loginName);
 
-    void insertUser(User user);
+    boolean insertUser(User user);
+
+    boolean insertUser(UserVo user);
 }
