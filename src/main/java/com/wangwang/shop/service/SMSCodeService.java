@@ -1,5 +1,5 @@
 package com.wangwang.shop.service;
 
 public interface SMSCodeService {
-    void insertSMSCode(String code, String phone);
+    boolean updateSMSCode(String code, String phone);
 }

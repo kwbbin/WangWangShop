@@ -32,16 +32,17 @@ public class SendSmsController extends BaseController {
         String phone = request1.getParameter("phone");
         String str = SMSCodeTools.getSMSCode();
 
-
-
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "***", "***");
-        IAcsClient client = new DefaultAcsClient(profile);
-
-        if (userService.existPhone(phone)){
-            smsCodeService.insertSMSCode(str,phone);
-        }else{
+        if (!userService.existPhone(phone)){
             return failed("手机号不存在！");
         }
+        if(!smsCodeService.updateSMSCode(str,phone)){
+            return failed("你已经申请过验证码，请稍后再试");
+        };
+
+
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "****", "***");
+        IAcsClient client = new DefaultAcsClient(profile);
+
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
         request.setDomain("dysmsapi.aliyuncs.com");
@@ -60,6 +61,7 @@ public class SendSmsController extends BaseController {
         } catch (ClientException e) {
             e.printStackTrace();
         }
+
 
         return success("短信验证码发送成功！");
     }
