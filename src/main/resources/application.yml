@@ -1,7 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/wangwangshop?useUnicode=true&characterEncoding=utf8&useSSL=false
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/wangwangshop?useUnicode=true&characterEncoding=utf8&useSSL=false
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3307/shop_2
     username: root
     password: 19971207
     type: com.alibaba.druid.pool.DruidDataSource
@@ -35,7 +37,20 @@ spring:
   resources:
     static-locations: classpath:/
 
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        format_sql: true
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+
+
 mybatis:
   ##xml文件的路径配置
   mapper-locations: classpath:static/mapper/*.xml
   type-aliases-package: com.wangwang.shop.bean
+server:
+  port: 8081
