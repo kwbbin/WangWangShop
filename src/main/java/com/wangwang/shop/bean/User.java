@@ -1,8 +1,13 @@
 package com.wangwang.shop.bean;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     private String loginName;
@@ -34,6 +39,8 @@ public class User {
     private Integer userStatus;
 
     private Date registerdate;
+
+    private String token;
 
     public Long getUserId() {
         return userId;
@@ -161,5 +168,13 @@ public class User {
 
     public void setRegisterdate(Date registerdate) {
         this.registerdate = registerdate;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
     }
 }

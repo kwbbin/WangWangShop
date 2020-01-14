@@ -6,7 +6,7 @@
 <generatorConfiguration>
     <!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
     <classPathEntry
-            location="E:\apache-maven-3.0.4\MAVEN_REPOSITORY\mysql\mysql-connector-java\5.1.37\mysql-connector-java-5.1.37.jar" />
+            location="E:\apache-maven-3.0.4\MAVEN_REPOSITORY\org\mariadb\jdbc\mariadb-java-client\2.5.2\mariadb-java-client-2.5.2.jar" />
 
     <context id="scm_mysql_tables" targetRuntime="MyBatis3">
         <!-- 防止生成的代码中有很多注释，加入下面的配置控制 -->
@@ -16,8 +16,8 @@
         </commentGenerator>
 
         <!-- 数据库连接 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/wangwangshop?characterEncoding=UTF-8"
+        <jdbcConnection driverClass="org.mariadb.jdbc.Driver"
+                        connectionURL="jdbc:mariadb://localhost:3307/shop_2"
                         userId="root"
                         password="19971207">
             <property name="nullCatalogMeansCurrent" value="true"/>
@@ -76,14 +76,14 @@
 <!--        <table tableName="shop" domainObjectName="Shop"/>-->
 <!--        <table tableName="shopping_cart" domainObjectName="ShoppingCart"/>-->
 <!--        <table tableName="user" domainObjectName="User"/>-->
-        <table tableName="user_log" domainObjectName="UserLog"/>
+<!--        <table tableName="user_log" domainObjectName="UserLog"/>-->
 <!--        <table tableName="user_coupon" domainObjectName="UserCoupon"/>-->
 <!--        <table tableName="user_member" domainObjectName="UserMember"/>-->
 <!--        <table tableName="sms_code" domainObjectName="SMSCode"/>-->
 
 <!--        <table tableName="user" domainObjectName="User"/>-->
 
-<!--        <table tableName="class" domainObjectName="MyClass"-->
+<!--        <table tableName="admin" domainObjectName="Admin"-->
 <!--               enableCountByExample="false" enableUpdateByExample="false"-->
 <!--               enableDeleteByExample="false" enableSelectByExample="false"-->
 <!--               selectByExampleQueryId="false" />-->

@@ -9,17 +9,21 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.wangwang.shop.bean.ResultBean;
+import com.wangwang.shop.bean.User;
 import com.wangwang.shop.service.SMSCodeService;
 import com.wangwang.shop.service.UserService;
 import com.wangwang.shop.utils.SMSCodeTools;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
 
+/**
+ * 发送验证码
+ */
 @RestController
 public class SendSmsController extends BaseController {
     @Autowired
@@ -27,14 +31,17 @@ public class SendSmsController extends BaseController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value="/SMSCode", method= RequestMethod.POST)
-    public ResultBean getSMSCode(HttpServletRequest request1){
-        String phone = request1.getParameter("phone");
+    @PostMapping(value="/user/SMSCode")
+    public ResultBean getSMSCode(HttpServletRequest request1,@RequestBody User user){
+        String phone = user.getPhone();
         String str = SMSCodeTools.getSMSCode();
 
 //        if (!userService.existPhone(phone)){
 //            return failed("手机号不存在！");
 //        }
+        if("".equals(phone)||phone == null){
+            return failed("发送失败，请填写电话号码");
+        }
         if(!smsCodeService.updateSMSCode(str,phone)){
             return failed("你已经申请过验证码，请稍后再试");
         };

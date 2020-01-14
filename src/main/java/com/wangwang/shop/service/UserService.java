@@ -16,5 +16,7 @@ public interface UserService {
 
     boolean insertUser(User user);
 
+    void updateUser(User user);
+
     boolean insertUser(UserVo user);
 }

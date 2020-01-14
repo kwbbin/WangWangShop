@@ -4,6 +4,7 @@ import com.wangwang.shop.bean.ResultBean;
 import com.wangwang.shop.bean.VO.UserVo;
 import com.wangwang.shop.service.UserService;
 import com.wangwang.shop.utils.MD5Tools;
+import com.wangwang.shop.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -31,6 +32,7 @@ public class UserController extends BaseController {
             @ApiImplicitParam(paramType="String", name = "loginName", value = "用户名", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="String", name = "password", value = "密码", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="String", name = "phone", value = "手机号", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="String", name = "email", value = "邮箱", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="String", name = "code", value = "验证码", required = true, dataType = "String")
     })
     @ResponseBody
@@ -49,6 +51,9 @@ public class UserController extends BaseController {
         user.setLoginName(userVo.getLoginName());
         user.setPassword(MD5Tools.string2MD5(userVo.getPassword()));
         user.setPhone(userVo.getPhone());
+        if (StringUtils.trim(user.getEmail()) != null){
+            user.setEmail(userVo.getEmail());
+        }
         user.setCode(userVo.getCode());
         if (!userService.insertUser(user)){
             return failed("验证码错误或者过期！");
@@ -56,7 +61,7 @@ public class UserController extends BaseController {
 
         request.getSession().setAttribute("user",userService.getUserByLoginName(user.getLoginName()));
 
-        return success("注册成功！");
+        return success("注册成功！请登录");
     }
 
 

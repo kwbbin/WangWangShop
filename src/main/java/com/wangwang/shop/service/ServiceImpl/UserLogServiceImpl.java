@@ -56,4 +56,6 @@ public class UserLogServiceImpl implements UserLogService {
         userLog.setLoginUser(id);
         userLogMapper.insert(userLog);
     }
+
+
 }

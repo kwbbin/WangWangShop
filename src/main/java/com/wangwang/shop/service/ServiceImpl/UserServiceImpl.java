@@ -7,6 +7,7 @@ import com.wangwang.shop.bean.UserExample;
 import com.wangwang.shop.bean.VO.UserVo;
 import com.wangwang.shop.dao.SMSCodeMapper;
 import com.wangwang.shop.dao.UserMapper;
+import com.wangwang.shop.dao.default_dao.UserDao;
 import com.wangwang.shop.service.UserService;
 import com.wangwang.shop.utils.MD5Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     SMSCodeMapper smsCodeMapper;
+
+    @Autowired
+    UserDao userDao;
 
     @Override
     public User getUser(Long id){
@@ -82,6 +86,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean insertUser(User user) {
         return true;
+    }
+
+    public void updateUser(User user){
+        userDao.save(user);
     }
 
     @Override

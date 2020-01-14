@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,7 +37,9 @@ public class LoginController extends BaseController {
             @ApiImplicitParam(paramType="String", name = "loginName", value = "用户名", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="String", name = "password", value = "密码", required = true, dataType = "String")
     })
-    public ResultBean login(String loginName , String password, HttpServletRequest request){
+    public ResultBean login(@RequestBody User u, HttpServletRequest request){
+        String loginName = u.getLoginName();
+        String password = u.getPassword();
         if (loginName==null||password==null){
             return failed("请检查参数");
         }
