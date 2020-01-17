@@ -1,21 +1,13 @@
 package com.wangwang.shop.bean;
 
-import lombok.ToString;
+import java.io.Serializable;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="goods_sort_one_two")
-@ToString
-@IdClass(GoodsSortOneTwoPK.class)
-public class GoodsSortOneTwo extends GoodsSortOneTwoPK {
-
+//@Embeddable
+public class GoodsSortOneTwoPK implements Serializable {
     private Integer goodsSortOneId;
-
 
     private Integer goodSortTwoId;
 
-    @Id
     public Integer getGoodsSortOneId() {
         return goodsSortOneId;
     }
@@ -24,7 +16,6 @@ public class GoodsSortOneTwo extends GoodsSortOneTwoPK {
         this.goodsSortOneId = goodsSortOneId;
     }
 
-    @Id
     public Integer getGoodSortTwoId() {
         return goodSortTwoId;
     }

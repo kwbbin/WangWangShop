@@ -233,6 +233,126 @@ public class GoodsSortTwoExample {
             addCriterion("sort_name not between", value1, value2, "sortName");
             return (Criteria) this;
         }
+
+        public Criteria andHotNumIsNull() {
+            addCriterion("hot_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumIsNotNull() {
+            addCriterion("hot_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumEqualTo(Integer value) {
+            addCriterion("hot_num =", value, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumNotEqualTo(Integer value) {
+            addCriterion("hot_num <>", value, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumGreaterThan(Integer value) {
+            addCriterion("hot_num >", value, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("hot_num >=", value, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumLessThan(Integer value) {
+            addCriterion("hot_num <", value, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumLessThanOrEqualTo(Integer value) {
+            addCriterion("hot_num <=", value, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumIn(List<Integer> values) {
+            addCriterion("hot_num in", values, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumNotIn(List<Integer> values) {
+            addCriterion("hot_num not in", values, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumBetween(Integer value1, Integer value2) {
+            addCriterion("hot_num between", value1, value2, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andHotNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("hot_num not between", value1, value2, "hotNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNull() {
+            addCriterion("state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNotNull() {
+            addCriterion("state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateEqualTo(Byte value) {
+            addCriterion("state =", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotEqualTo(Byte value) {
+            addCriterion("state <>", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThan(Byte value) {
+            addCriterion("state >", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThanOrEqualTo(Byte value) {
+            addCriterion("state >=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThan(Byte value) {
+            addCriterion("state <", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThanOrEqualTo(Byte value) {
+            addCriterion("state <=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIn(List<Byte> values) {
+            addCriterion("state in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotIn(List<Byte> values) {
+            addCriterion("state not in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateBetween(Byte value1, Byte value2) {
+            addCriterion("state between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotBetween(Byte value1, Byte value2) {
+            addCriterion("state not between", value1, value2, "state");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

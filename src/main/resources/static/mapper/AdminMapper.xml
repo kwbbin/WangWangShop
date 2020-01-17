@@ -19,6 +19,7 @@
     <result column="user_qq" jdbcType="VARCHAR" property="userQq" />
     <result column="user_score" jdbcType="INTEGER" property="userScore" />
     <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,7 +82,7 @@
   <sql id="Base_Column_List">
     admin_id, user_id, birthday, email, last_login_date, login_name, password, phone, 
     registerdate, sex, true_name, user_form, user_money, user_photo, user_qq, user_score, 
-    user_status
+    user_status, token
   </sql>
   <select id="selectByExample" parameterType="com.wangwang.shop.bean.AdminExample" resultMap="BaseResultMap">
     select
@@ -119,13 +120,15 @@
       password, phone, registerdate, 
       sex, true_name, user_form, 
       user_money, user_photo, user_qq, 
-      user_score, user_status)
+      user_score, user_status, token
+      )
     values (#{adminId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{birthday,jdbcType=TIMESTAMP}, 
       #{email,jdbcType=VARCHAR}, #{lastLoginDate,jdbcType=TIMESTAMP}, #{loginName,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{registerdate,jdbcType=TIMESTAMP}, 
       #{sex,jdbcType=INTEGER}, #{trueName,jdbcType=VARCHAR}, #{userForm,jdbcType=INTEGER}, 
       #{userMoney,jdbcType=INTEGER}, #{userPhoto,jdbcType=VARCHAR}, #{userQq,jdbcType=VARCHAR}, 
-      #{userScore,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER})
+      #{userScore,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.wangwang.shop.bean.Admin">
     insert into admin
@@ -181,6 +184,9 @@
       <if test="userStatus != null">
         user_status,
       </if>
+      <if test="token != null">
+        token,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="adminId != null">
@@ -233,6 +239,9 @@
       </if>
       <if test="userStatus != null">
         #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -296,6 +305,9 @@
       <if test="record.userStatus != null">
         user_status = #{record.userStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -319,7 +331,8 @@
       user_photo = #{record.userPhoto,jdbcType=VARCHAR},
       user_qq = #{record.userQq,jdbcType=VARCHAR},
       user_score = #{record.userScore,jdbcType=INTEGER},
-      user_status = #{record.userStatus,jdbcType=INTEGER}
+      user_status = #{record.userStatus,jdbcType=INTEGER},
+      token = #{record.token,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -375,6 +388,9 @@
       <if test="userStatus != null">
         user_status = #{userStatus,jdbcType=INTEGER},
       </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
     </set>
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
@@ -395,7 +411,8 @@
       user_photo = #{userPhoto,jdbcType=VARCHAR},
       user_qq = #{userQq,jdbcType=VARCHAR},
       user_score = #{userScore,jdbcType=INTEGER},
-      user_status = #{userStatus,jdbcType=INTEGER}
+      user_status = #{userStatus,jdbcType=INTEGER},
+      token = #{token,jdbcType=VARCHAR}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
 </mapper>

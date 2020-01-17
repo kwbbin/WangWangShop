@@ -1,21 +1,10 @@
 package com.wangwang.shop.bean;
 
-import lombok.ToString;
-
-import javax.persistence.*;
-
-@Entity
-@Table(name="goods_sort_one_two")
-@ToString
-@IdClass(GoodsSortOneTwoPK.class)
-public class GoodsSortOneTwo extends GoodsSortOneTwoPK {
-
+public class GoodsSortOneTwoKey {
     private Integer goodsSortOneId;
-
 
     private Integer goodSortTwoId;
 
-    @Id
     public Integer getGoodsSortOneId() {
         return goodsSortOneId;
     }
@@ -24,7 +13,6 @@ public class GoodsSortOneTwo extends GoodsSortOneTwoPK {
         this.goodsSortOneId = goodsSortOneId;
     }
 
-    @Id
     public Integer getGoodSortTwoId() {
         return goodSortTwoId;
     }

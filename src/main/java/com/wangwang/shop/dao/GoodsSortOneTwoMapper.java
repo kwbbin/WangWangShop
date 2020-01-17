@@ -1,22 +1,25 @@
 package com.wangwang.shop.dao;
 
-import com.wangwang.shop.bean.GoodsSortOneTwo;
 import com.wangwang.shop.bean.GoodsSortOneTwoExample;
-import java.util.List;
+import com.wangwang.shop.bean.GoodsSortOneTwoKey;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface GoodsSortOneTwoMapper {
     int countByExample(GoodsSortOneTwoExample example);
 
     int deleteByExample(GoodsSortOneTwoExample example);
 
-    int insert(GoodsSortOneTwo record);
+    int deleteByPrimaryKey(GoodsSortOneTwoKey key);
 
-    int insertSelective(GoodsSortOneTwo record);
+    int insert(GoodsSortOneTwoKey record);
 
-    List<GoodsSortOneTwo> selectByExample(GoodsSortOneTwoExample example);
+    int insertSelective(GoodsSortOneTwoKey record);
 
-    int updateByExampleSelective(@Param("record") GoodsSortOneTwo record, @Param("example") GoodsSortOneTwoExample example);
+    List<GoodsSortOneTwoKey> selectByExample(GoodsSortOneTwoExample example);
 
-    int updateByExample(@Param("record") GoodsSortOneTwo record, @Param("example") GoodsSortOneTwoExample example);
+    int updateByExampleSelective(@Param("record") GoodsSortOneTwoKey record, @Param("example") GoodsSortOneTwoExample example);
+
+    int updateByExample(@Param("record") GoodsSortOneTwoKey record, @Param("example") GoodsSortOneTwoExample example);
 }

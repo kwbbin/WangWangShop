@@ -12,4 +12,20 @@ public class ResultBean<T> implements Serializable {
     String message;
     String token;
     T data;
+
+    public ResultBean(Integer code, String message, T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
+    public ResultBean(Integer code, String message, String token, T data) {
+        this.code = code;
+        this.message = message;
+        this.token = token;
+        this.data = data;
+    }
+
+    public ResultBean() {
+    }
 }

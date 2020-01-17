@@ -3,8 +3,8 @@ package com.wangwang.shop.interceptor;
 import com.alibaba.fastjson.JSON;
 import com.wangwang.shop.bean.Admin;
 import com.wangwang.shop.bean.ResultBean;
-import com.wangwang.shop.bean.User;
 import com.wangwang.shop.service.UserService;
+import com.wangwang.shop.service.manage.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,9 @@ public class UserLoginInterceptor implements HandlerInterceptor {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AdminService adminService;
+
     //这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         ResultBean resultBean = new ResultBean();
@@ -29,10 +32,10 @@ public class UserLoginInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         //这里的User是登陆时放入session的
-        User student = (User) session.getAttribute("user");
         Admin admin = (Admin) session.getAttribute("admin");
+        String  token = request.getHeader("token");
         //如果session中没有admin，表示没登陆
-        if (student == null && admin==null){
+        if (token==null|| adminService.getAdminByToken(token) == null){
             resultBean.setCode(1);
             resultBean.setMessage("请您先登录");
             //这个方法返回false表示忽略当前请求，如果一个用户调用了需要登陆才能使用的接口，如果他没有登陆这里会直接忽略掉

@@ -2,11 +2,11 @@ package com.wangwang.shop.service.manage.manageImpl;
 
 import com.wangwang.shop.bean.Admin;
 import com.wangwang.shop.bean.ResultBean;
-import com.wangwang.shop.bean.User;
 import com.wangwang.shop.dao.default_dao.UserDao;
 import com.wangwang.shop.dao.manage_dao.AdminDao;
 import com.wangwang.shop.service.UserService;
 import com.wangwang.shop.service.manage.AdminService;
+import com.wangwang.shop.utils.MD5Tools;
 import com.wangwang.shop.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,25 +30,19 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public ResultBean checkUserNameAndPass(User user, HttpServletRequest request) {
+    public ResultBean checkUserNameAndPass(Admin ad, HttpServletRequest request) {
         ResultBean resultBean = new ResultBean();
         String token  = request.getSession().getId();
-        if (StringUtils.trim(user.getLoginName()) == null || StringUtils.trim(user.getPassword()) == null){
+        if (StringUtils.trim(ad.getLoginName()) == null || StringUtils.trim(ad.getPassword()) == null){
             resultBean.setCode(1);
             resultBean.setMessage("请完整填写用户名和密码");
             return resultBean;
         }
 
-        User u = userService.getUserByLoginNamePas(StringUtils.trim(user.getLoginName()),StringUtils.trim(user.getPassword()));
-        if (u == null){
-            resultBean.setCode(1);
-            resultBean.setMessage("用户名或密码错误");
-            return resultBean;
-        }
-        Admin admin = adminDao.getAdminByUserId(u.getUserId());
+        Admin admin = getUserByLoginNamePas(StringUtils.trim(ad.getLoginName()),StringUtils.trim(ad.getPassword()));
         if (admin == null){
             resultBean.setCode(1);
-            resultBean.setMessage("你不是管理员，请退出");
+            resultBean.setMessage("用户名或密码错误");
             return resultBean;
         }
 
@@ -56,10 +50,24 @@ public class AdminServiceImpl implements AdminService {
         resultBean.setMessage("登录成功");
         resultBean.setData(admin);
         resultBean.setToken(token);
+        admin.setToken(token);
         request.getSession().setAttribute("admin",admin);
-        u.setToken(token);
-        userDao.save(u);
+//        System.out.println("adminSession======"+request.getSession().getAttribute("admin")+"sessionId"+request.getSession().getId());
+        adminDao.save(admin);
 
         return resultBean;
+    }
+
+    @Override
+    public Admin getUserByLoginNamePas(String loginName, String password) {
+        password = MD5Tools.string2MD5(password);
+        Admin admin = adminDao.getAdminByLoginNameAndPassword(loginName,password);
+        return admin;
+    }
+
+    @Override
+    public Admin getAdminByToken(String token) {
+        Admin admin = adminDao.getAdminByToken(token);
+        return admin;
     }
 }

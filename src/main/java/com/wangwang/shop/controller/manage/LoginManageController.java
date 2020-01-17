@@ -2,7 +2,6 @@ package com.wangwang.shop.controller.manage;
 
 import com.wangwang.shop.bean.Admin;
 import com.wangwang.shop.bean.ResultBean;
-import com.wangwang.shop.bean.User;
 import com.wangwang.shop.service.manage.AdminService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,8 @@ public class LoginManageController {
     AdminService adminService;
 
     @RequestMapping("login")
-    public ResultBean loginByUserNamePassword(@RequestBody User user, HttpServletRequest request){
-        return adminService.checkUserNameAndPass(user,request);
+    public ResultBean loginByUserNamePassword(@RequestBody Admin admin, HttpServletRequest request){
+        return adminService.checkUserNameAndPass(admin,request);
     }
 
     @RequestMapping("/test")

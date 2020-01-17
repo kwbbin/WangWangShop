@@ -6,8 +6,6 @@ import java.util.Date;
 @Entity
 @Table(name="admin")
 public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer adminId;
 
     private Long userId;
@@ -42,6 +40,9 @@ public class Admin {
 
     private Integer userStatus;
 
+    private String token;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getAdminId() {
         return adminId;
     }
@@ -176,5 +177,13 @@ public class Admin {
 
     public void setUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
     }
 }

@@ -1,29 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wangwang.shop.dao.GoodsSortTwoMapper" >
-  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.GoodsSortTwo" >
-    <id column="goods_sort_two_id" property="goodsSortTwoId" jdbcType="INTEGER" />
-    <result column="sort_name" property="sortName" jdbcType="CHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangwang.shop.dao.GoodsSortTwoMapper">
+  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.GoodsSortTwo">
+    <id column="goods_sort_two_id" jdbcType="INTEGER" property="goodsSortTwoId" />
+    <result column="sort_name" jdbcType="CHAR" property="sortName" />
+    <result column="hot_num" jdbcType="INTEGER" property="hotNum" />
+    <result column="state" jdbcType="TINYINT" property="state" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -34,25 +36,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -63,102 +65,132 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
-    goods_sort_two_id, sort_name
+  <sql id="Base_Column_List">
+    goods_sort_two_id, sort_name, hot_num, state
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.GoodsSortTwoExample" >
+  <select id="selectByExample" parameterType="com.wangwang.shop.bean.GoodsSortTwoExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from goods_sort_two
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from goods_sort_two
     where goods_sort_two_id = #{goodsSortTwoId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from goods_sort_two
     where goods_sort_two_id = #{goodsSortTwoId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.GoodsSortTwoExample" >
+  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.GoodsSortTwoExample">
     delete from goods_sort_two
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.wangwang.shop.bean.GoodsSortTwo" >
-    insert into goods_sort_two (goods_sort_two_id, sort_name)
-    values (#{goodsSortTwoId,jdbcType=INTEGER}, #{sortName,jdbcType=CHAR})
+  <insert id="insert" parameterType="com.wangwang.shop.bean.GoodsSortTwo">
+    insert into goods_sort_two (goods_sort_two_id, sort_name, hot_num, 
+      state)
+    values (#{goodsSortTwoId,jdbcType=INTEGER}, #{sortName,jdbcType=CHAR}, #{hotNum,jdbcType=INTEGER}, 
+      #{state,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.GoodsSortTwo" >
+  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.GoodsSortTwo">
     insert into goods_sort_two
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsSortTwoId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsSortTwoId != null">
         goods_sort_two_id,
       </if>
-      <if test="sortName != null" >
+      <if test="sortName != null">
         sort_name,
       </if>
+      <if test="hotNum != null">
+        hot_num,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsSortTwoId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsSortTwoId != null">
         #{goodsSortTwoId,jdbcType=INTEGER},
       </if>
-      <if test="sortName != null" >
+      <if test="sortName != null">
         #{sortName,jdbcType=CHAR},
+      </if>
+      <if test="hotNum != null">
+        #{hotNum,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.wangwang.shop.bean.GoodsSortTwoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.wangwang.shop.bean.GoodsSortTwoExample" resultType="java.lang.Integer">
     select count(*) from goods_sort_two
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update goods_sort_two
-    <set >
-      <if test="record.goodsSortTwoId != null" >
+    <set>
+      <if test="record.goodsSortTwoId != null">
         goods_sort_two_id = #{record.goodsSortTwoId,jdbcType=INTEGER},
       </if>
-      <if test="record.sortName != null" >
+      <if test="record.sortName != null">
         sort_name = #{record.sortName,jdbcType=CHAR},
       </if>
+      <if test="record.hotNum != null">
+        hot_num = #{record.hotNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update goods_sort_two
     set goods_sort_two_id = #{record.goodsSortTwoId,jdbcType=INTEGER},
-      sort_name = #{record.sortName,jdbcType=CHAR}
-    <if test="_parameter != null" >
+      sort_name = #{record.sortName,jdbcType=CHAR},
+      hot_num = #{record.hotNum,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=TINYINT}
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wangwang.shop.bean.GoodsSortTwo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.wangwang.shop.bean.GoodsSortTwo">
     update goods_sort_two
-    <set >
-      <if test="sortName != null" >
+    <set>
+      <if test="sortName != null">
         sort_name = #{sortName,jdbcType=CHAR},
+      </if>
+      <if test="hotNum != null">
+        hot_num = #{hotNum,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
       </if>
     </set>
     where goods_sort_two_id = #{goodsSortTwoId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wangwang.shop.bean.GoodsSortTwo" >
+  <update id="updateByPrimaryKey" parameterType="com.wangwang.shop.bean.GoodsSortTwo">
     update goods_sort_two
-    set sort_name = #{sortName,jdbcType=CHAR}
+    set sort_name = #{sortName,jdbcType=CHAR},
+      hot_num = #{hotNum,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT}
     where goods_sort_two_id = #{goodsSortTwoId,jdbcType=INTEGER}
   </update>
 </mapper>
