@@ -26,6 +26,7 @@ public class LoginController extends BaseController {
 
 
 
+
     @PostMapping("/getUser")
     public User getStudent(@RequestParam Long id){
         return userService.getUser(id);
@@ -38,35 +39,33 @@ public class LoginController extends BaseController {
             @ApiImplicitParam(paramType="String", name = "password", value = "密码", required = true, dataType = "String")
     })
     public ResultBean login(@RequestBody User u, HttpServletRequest request){
-        String loginName = u.getLoginName();
-        String password = u.getPassword();
-        if (loginName==null||password==null){
-            return failed("请检查参数");
-        }
-        User user=null;
-        int num=userLogService.countNumLogin(loginName);
-        if(num<=4){
-            if(userService.existLoginName(loginName)){
-                user=userService.getUserByLoginNamePas(loginName,password);
-                if (user==null){
-                    if (num<5){
-                        Long id = userService.getUserByLoginName(loginName).getUserId();
-                        userLogService.insertUserLog(id);
-                        return failed("密码错误，您今天还有"+(5-num-1)+"次机会");
-                    }else{
-                        return failed("登录密码错误到达五次，请明天再试！");
-                    }
-                }
-
-            }else{
-                return failed("用户不存在！");
-            }
-        }else{
-            return failed("登录密码错误到达五次，请明天再试！");
-        }
-
-        request.getSession().setAttribute("user",user);
-
-        return success("登录成功");
+        return userService.userLogin(u,request);
     }
+
+    @PostMapping("/loginOut")
+    public ResultBean loginOut(HttpServletRequest request){
+        return userService.loginOut(request);
+    }
+
+
+    @PostMapping("/getLoginUser")
+    public ResultBean<User> getClientUser(HttpServletRequest request){
+        ResultBean<User> resultBean = new ResultBean<>();
+        User user = userService.getUserByToken(request.getHeader("token"));
+        System.out.println("user "+user);
+        String token = request.getHeader("token");
+        if(token != null && token != ""){
+            resultBean.setData(user);
+            resultBean.setMessage("获取成功");
+            resultBean.setCode(0);
+        }
+        else{
+            resultBean.setMessage("获取失败");
+            resultBean.setCode(1);
+        }
+        return resultBean;
+    }
+
+
+
 }

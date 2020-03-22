@@ -1,7 +1,14 @@
 package com.wangwang.shop.bean;
 
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
+@Entity
+@Table(name="goods")
+@ToString
 public class Goods {
     private Long goodsId;
 
@@ -25,7 +32,7 @@ public class Goods {
 
     private Integer saleTotal;
 
-    private Integer price;
+    private BigDecimal price;
 
     private Date saleDate;
 
@@ -33,6 +40,10 @@ public class Goods {
 
     private Date createDate;
 
+    private String spec;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getGoodsId() {
         return goodsId;
     }
@@ -121,11 +132,11 @@ public class Goods {
         this.saleTotal = saleTotal;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -151,5 +162,13 @@ public class Goods {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public String getSpec() {
+        return spec;
+    }
+
+    public void setSpec(String spec) {
+        this.spec = spec == null ? null : spec.trim();
     }
 }

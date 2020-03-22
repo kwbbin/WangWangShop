@@ -1,5 +1,6 @@
 package com.wangwang.shop.service;
 
+import com.wangwang.shop.bean.GoodsSortTwo;
 import com.wangwang.shop.bean.ResultBean;
 import com.wangwang.shop.bean.SortAll;
 import com.wangwang.shop.bean.VO.SortAllVo;
@@ -13,4 +14,5 @@ public interface GoodsSortService {
     ResultBean<List<SortAll>> getSortAll();
     ResultBean<String> updateSortAll(SortAll sortAll);
     ResultBean updateSortHot(Integer id);
+    ResultBean<List<GoodsSortTwo>> getAllSortTwoByOneId(Integer id);
 }

@@ -1,5 +1,12 @@
 package com.wangwang.shop.bean;
 
+import lombok.ToString;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="images")
+@ToString
 public class Images {
     private Long imageId;
 
@@ -7,6 +14,8 @@ public class Images {
 
     private String imageDesc;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getImageId() {
         return imageId;
     }

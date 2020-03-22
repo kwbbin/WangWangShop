@@ -1,22 +1,11 @@
 package com.wangwang.shop.bean;
 
-import lombok.ToString;
+import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="images_goods")
-@ToString
-@IdClass(GoodsImagesPK.class)
-public class ImagesGoodsKey extends GoodsImagesPK{
+public class GoodsImagesPK implements Serializable {
     private Long goodsId;
-
     private Long imageId;
 
-    @Id
     public Long getGoodsId() {
         return goodsId;
     }
@@ -25,7 +14,6 @@ public class ImagesGoodsKey extends GoodsImagesPK{
         this.goodsId = goodsId;
     }
 
-    @Id
     public Long getImageId() {
         return imageId;
     }

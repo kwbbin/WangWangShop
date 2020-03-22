@@ -1,7 +1,10 @@
 package com.wangwang.shop.bean;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="user_log")
 public class UserLog {
     private Long id;
 
@@ -9,6 +12,10 @@ public class UserLog {
 
     private Long loginUser;
 
+    private String token;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -31,5 +38,13 @@ public class UserLog {
 
     public void setLoginUser(Long loginUser) {
         this.loginUser = loginUser;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
     }
 }

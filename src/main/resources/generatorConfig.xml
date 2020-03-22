@@ -63,6 +63,7 @@
 <!--        <table tableName="admin" domainObjectName="Admin"/>-->
 <!--        <table tableName="coupon" domainObjectName="Coupon"/>-->
 <!--        <table tableName="goods" domainObjectName="Goods"/>-->
+            <table tableName="hot_view_home" domainObjectName="HotViewHome"/>
 <!--        <table tableName="goods_shop" domainObjectName="GoodsShop"/>-->
 <!--        <table tableName="goods_sort" domainObjectName="GoodsSort"/>-->
 <!--        <table tableName="goods_sort_one" domainObjectName="GoodsSortOne"/>-->

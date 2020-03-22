@@ -7,10 +7,12 @@ import com.wangwang.shop.bean.UserLog;
 import com.wangwang.shop.bean.UserLogExample;
 import com.wangwang.shop.dao.UserLogMapper;
 import com.wangwang.shop.dao.UserMapper;
+import com.wangwang.shop.dao.default_dao.UserLogDao;
 import com.wangwang.shop.service.UserLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,11 +24,16 @@ public class UserLogServiceImpl implements UserLogService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserLogDao userLogDao;
+
     @Override
     public Integer countNumLogin(String loginName) {
         UserExample userExample = new UserExample();
         userExample.createCriteria().andLoginNameEqualTo(loginName);
         List<User> li = userMapper.selectByExample(userExample);
+
         Long id=-1L;
         if (li.size()>0){
             id = li.get(0).getUserId();
@@ -46,7 +53,13 @@ public class UserLogServiceImpl implements UserLogService {
         userLogExample.createCriteria().andLoginUserEqualTo(id).andLoginDateBetween(date1,date2);
         List<UserLog> list= userLogMapper.selectByExample(userLogExample);
 
-        return list.size();
+        List<UserLog> list1 = new ArrayList<>();
+        for (UserLog user : list){
+            if (user.getToken()== null|| user.getToken()== ""){
+                list1.add(user);
+            }
+        }
+        return list1.size();
     }
 
     @Override
@@ -57,5 +70,8 @@ public class UserLogServiceImpl implements UserLogService {
         userLogMapper.insert(userLog);
     }
 
+    public void insertUserLog(UserLog userLog){
+        userLogDao.save(userLog);
+    }
 
 }

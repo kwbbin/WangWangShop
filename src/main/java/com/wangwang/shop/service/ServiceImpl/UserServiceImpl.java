@@ -1,23 +1,26 @@
 package com.wangwang.shop.service.ServiceImpl;
 
-import com.wangwang.shop.bean.SMSCode;
-import com.wangwang.shop.bean.SMSCodeExample;
-import com.wangwang.shop.bean.User;
-import com.wangwang.shop.bean.UserExample;
+import com.wangwang.shop.bean.*;
 import com.wangwang.shop.bean.VO.UserVo;
 import com.wangwang.shop.dao.SMSCodeMapper;
 import com.wangwang.shop.dao.UserMapper;
 import com.wangwang.shop.dao.default_dao.UserDao;
+import com.wangwang.shop.service.UserLogService;
 import com.wangwang.shop.service.UserService;
 import com.wangwang.shop.utils.MD5Tools;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     UserMapper userMapper;
 
@@ -26,6 +29,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserLogService userLogService;
 
     @Override
     public User getUser(Long id){
@@ -115,5 +123,80 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         return true;
+    }
+
+    public ResultBean<String> userLogin(User u, HttpServletRequest request){
+        String token  = request.getSession().getId();
+        ResultBean resultBean = new ResultBean();
+        String loginName = u.getLoginName();
+        String password = u.getPassword();
+        if (loginName==null||password==null){
+            resultBean.setCode(1);
+            resultBean.setMessage("请检查参数");
+            return resultBean;
+        }
+        User user=null;
+        int num=userLogService.countNumLogin(loginName);
+        if(num<=4){
+            if(userService.existLoginName(loginName)){
+                user=userService.getUserByLoginNamePas(loginName,password);
+                if (user==null){
+                    if (num<5){
+                        Long id = userService.getUserByLoginName(loginName).getUserId();
+                        userLogService.insertUserLog(id);
+                        resultBean.setCode(1);
+                        resultBean.setMessage("密码错误，您今天还有"+(5-num-1)+"次机会");
+                        return resultBean;
+                    }else{
+                        resultBean.setCode(1);
+                        resultBean.setMessage("登录密码错误到达五次，请明天再试！");
+                        return resultBean;
+                    }
+                }
+
+            }else{
+                resultBean.setCode(1);
+                resultBean.setMessage("用户不存在！");
+                return resultBean;
+            }
+        }else{
+            resultBean.setCode(1);
+            resultBean.setMessage("登录密码错误到达五次，请明天再试！");
+            return resultBean;
+        }
+        UserLog userLog = new UserLog();
+        userLog.setLoginDate(new Date());
+        userLog.setLoginUser(user.getUserId());
+        userLog.setToken(token);
+        userLogService.insertUserLog(userLog);
+        userService.updateUserToken(user.getUserId(),token);
+        logger.info("登录成功");
+        resultBean.setCode(0);
+        resultBean.setMessage("登录成功！");
+        resultBean.setData(token);
+        return resultBean;
+    }
+
+    public void updateUserToken(Long id, String token){
+        User user = userService.getUser(id);
+        user.setToken(token);
+        userDao.save(user);
+    }
+
+    @Override
+    public User getUserByToken(String token) {
+        return userDao.findUserByToken(token);
+    }
+
+    @Override
+    public ResultBean loginOut(HttpServletRequest request) {
+        ResultBean resultBean = new ResultBean();
+        User user = userService.getUserByToken(request.getHeader("token"));
+        user.setToken(null);
+        userDao.save(user);
+        resultBean.setCode(0);
+        resultBean.setMessage("注销成功");
+        logger.info("注销");
+        return resultBean;
     }
 }

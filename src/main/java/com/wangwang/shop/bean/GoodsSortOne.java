@@ -1,9 +1,12 @@
 package com.wangwang.shop.bean;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="goods_sort_one")
+@ToString
 public class GoodsSortOne {
     private Integer goodsSortOneId;
 

@@ -54,3 +54,10 @@ mybatis:
   type-aliases-package: com.wangwang.shop.bean
 server:
   port: 8081
+
+
+cbs:
+  filePath: file:///
+
+
+localInfoPath: http://localhost:8081/

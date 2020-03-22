@@ -1,6 +1,7 @@
 package com.wangwang.shop.controller.manage;
 
 import com.wangwang.shop.bean.GoodsSortOne;
+import com.wangwang.shop.bean.GoodsSortTwo;
 import com.wangwang.shop.bean.ResultBean;
 import com.wangwang.shop.bean.SortAll;
 import com.wangwang.shop.bean.VO.SortAllVo;
@@ -31,6 +32,15 @@ public class GoodsSortManageController {
         List<GoodsSortOne> list = goodsSortOneDao.findAll();
         ResultBean<GoodsSortOne> result = new ResultBean(0,"获取成功",list);
         return result;
+    }
+
+    /**
+     * 根据一级分类id查出相关联的所有二级分类
+     * @return
+     */
+    @RequestMapping("/sortTwoById")
+    public ResultBean<List<GoodsSortTwo>> getSortTwoById(@RequestBody GoodsSortOne goodsSortOne){
+        return goodsSortService.getAllSortTwoByOneId(goodsSortOne.getGoodsSortOneId());
     }
 
     /**

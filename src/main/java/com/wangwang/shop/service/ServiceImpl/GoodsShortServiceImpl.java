@@ -7,7 +7,6 @@ import com.wangwang.shop.dao.default_dao.GoodsSortOneDao;
 import com.wangwang.shop.dao.default_dao.GoodsSortOneTwoDao;
 import com.wangwang.shop.dao.default_dao.GoodsSortTwoDao;
 import com.wangwang.shop.service.GoodsSortService;
-import com.wangwang.shop.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,6 @@ public class GoodsShortServiceImpl implements GoodsSortService {
 
     public ResultBean<Map<String, List<String>>> getGoodsSortAll(){
         List<SortAll> gsAll = goodsSortAllDao.findAll();
-        List<String> list = new ArrayList();
         Map<String, List<String>> map = new LinkedHashMap<>();
         Set set = new HashSet();
         String item="";
@@ -41,18 +39,17 @@ public class GoodsShortServiceImpl implements GoodsSortService {
         }
         Iterator<String> it = set.iterator();
         while (it.hasNext()) {
+            List list = new ArrayList();
             String sortOne = it.next();
             for (SortAll sa : gsAll){
-                if(sa.getSortOne() == sortOne){
+                if(sa.getSortOne().equals(sortOne) ){
                     list.add(sa.getSortTwo());
                 }
             }
-            List<String> list1 = StringUtils.copyList(list);
-            map.put(sortOne,list1);
+            map.put(sortOne,list);
         }
 
         ResultBean<Map<String, List<String>>> resultBean = new ResultBean(0,"请求成功！",map);
-
         return resultBean;
     }
 
@@ -169,5 +166,22 @@ public class GoodsShortServiceImpl implements GoodsSortService {
         return resultBean;
     }
 
-    ;
+    public ResultBean<List<GoodsSortTwo>> getAllSortTwoByOneId(Integer id){
+        ResultBean<List<GoodsSortTwo>> resultBean = new ResultBean<>();
+        List<GoodsSortOneTwo> list = goodsSortOneTwoDao.getAllByGoodsSortOneId(id);
+        List<Integer> li = new ArrayList();
+        for (GoodsSortOneTwo goodsSortOneTwo : list){
+            li.add(goodsSortOneTwo.getGoodSortTwoId());
+        }
+        List<GoodsSortTwo> list2 =new ArrayList<>();
+        for (Integer num : li){
+            GoodsSortTwo goodsSortTwo = goodsSortTwoDao.findByGoodsSortTwoId(num);
+            list2.add(goodsSortTwo);
+            System.out.println(goodsSortTwo);
+        }
+        resultBean.setMessage("查询成功");
+        resultBean.setCode(0);
+        resultBean.setData(list2);
+        return resultBean;
+    }
 }

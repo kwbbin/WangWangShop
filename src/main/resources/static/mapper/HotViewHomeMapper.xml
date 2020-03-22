@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wangwang.shop.dao.HotViewHomeMapper" >
+  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.HotViewHome" >
+    <result column="goods_sort_one_id" property="goodsSortOneId" jdbcType="INTEGER" />
+    <result column="sort_one_name" property="sortOneName" jdbcType="CHAR" />
+    <result column="goods_sort_two_id" property="goodsSortTwoId" jdbcType="INTEGER" />
+    <result column="sort_two_name" property="sortTwoName" jdbcType="CHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="CHAR" />
+    <result column="goods_number" property="goodsNumber" jdbcType="CHAR" />
+    <result column="goods_sort_id" property="goodsSortId" jdbcType="INTEGER" />
+    <result column="sale_total" property="saleTotal" jdbcType="INTEGER" />
+    <result column="visit_num" property="visitNum" jdbcType="INTEGER" />
+    <result column="image_desc" property="imageDesc" jdbcType="CHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="CHAR" />
+    <result column="image_id" property="imageId" jdbcType="BIGINT" />
+    <result column="view_name" property="viewName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goods_sort_one_id, sort_one_name, goods_sort_two_id, sort_two_name, goods_id, name, 
+    goods_number, goods_sort_id, sale_total, visit_num, image_desc, image_url, image_id, 
+    view_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.HotViewHomeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hot_view_home
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.HotViewHomeExample" >
+    delete from hot_view_home
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wangwang.shop.bean.HotViewHome" >
+    insert into hot_view_home (goods_sort_one_id, sort_one_name, goods_sort_two_id, 
+      sort_two_name, goods_id, name, 
+      goods_number, goods_sort_id, sale_total, 
+      visit_num, image_desc, image_url, 
+      image_id, view_name)
+    values (#{goodsSortOneId,jdbcType=INTEGER}, #{sortOneName,jdbcType=CHAR}, #{goodsSortTwoId,jdbcType=INTEGER}, 
+      #{sortTwoName,jdbcType=CHAR}, #{goodsId,jdbcType=BIGINT}, #{name,jdbcType=CHAR}, 
+      #{goodsNumber,jdbcType=CHAR}, #{goodsSortId,jdbcType=INTEGER}, #{saleTotal,jdbcType=INTEGER}, 
+      #{visitNum,jdbcType=INTEGER}, #{imageDesc,jdbcType=CHAR}, #{imageUrl,jdbcType=CHAR}, 
+      #{imageId,jdbcType=BIGINT}, #{viewName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.HotViewHome" >
+    insert into hot_view_home
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsSortOneId != null" >
+        goods_sort_one_id,
+      </if>
+      <if test="sortOneName != null" >
+        sort_one_name,
+      </if>
+      <if test="goodsSortTwoId != null" >
+        goods_sort_two_id,
+      </if>
+      <if test="sortTwoName != null" >
+        sort_two_name,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="goodsNumber != null" >
+        goods_number,
+      </if>
+      <if test="goodsSortId != null" >
+        goods_sort_id,
+      </if>
+      <if test="saleTotal != null" >
+        sale_total,
+      </if>
+      <if test="visitNum != null" >
+        visit_num,
+      </if>
+      <if test="imageDesc != null" >
+        image_desc,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="viewName != null" >
+        view_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsSortOneId != null" >
+        #{goodsSortOneId,jdbcType=INTEGER},
+      </if>
+      <if test="sortOneName != null" >
+        #{sortOneName,jdbcType=CHAR},
+      </if>
+      <if test="goodsSortTwoId != null" >
+        #{goodsSortTwoId,jdbcType=INTEGER},
+      </if>
+      <if test="sortTwoName != null" >
+        #{sortTwoName,jdbcType=CHAR},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=CHAR},
+      </if>
+      <if test="goodsSortId != null" >
+        #{goodsSortId,jdbcType=INTEGER},
+      </if>
+      <if test="saleTotal != null" >
+        #{saleTotal,jdbcType=INTEGER},
+      </if>
+      <if test="visitNum != null" >
+        #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="imageDesc != null" >
+        #{imageDesc,jdbcType=CHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=CHAR},
+      </if>
+      <if test="imageId != null" >
+        #{imageId,jdbcType=BIGINT},
+      </if>
+      <if test="viewName != null" >
+        #{viewName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wangwang.shop.bean.HotViewHomeExample" resultType="java.lang.Integer" >
+    select count(*) from hot_view_home
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hot_view_home
+    <set >
+      <if test="record.goodsSortOneId != null" >
+        goods_sort_one_id = #{record.goodsSortOneId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sortOneName != null" >
+        sort_one_name = #{record.sortOneName,jdbcType=CHAR},
+      </if>
+      <if test="record.goodsSortTwoId != null" >
+        goods_sort_two_id = #{record.goodsSortTwoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sortTwoName != null" >
+        sort_two_name = #{record.sortTwoName,jdbcType=CHAR},
+      </if>
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=CHAR},
+      </if>
+      <if test="record.goodsNumber != null" >
+        goods_number = #{record.goodsNumber,jdbcType=CHAR},
+      </if>
+      <if test="record.goodsSortId != null" >
+        goods_sort_id = #{record.goodsSortId,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleTotal != null" >
+        sale_total = #{record.saleTotal,jdbcType=INTEGER},
+      </if>
+      <if test="record.visitNum != null" >
+        visit_num = #{record.visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.imageDesc != null" >
+        image_desc = #{record.imageDesc,jdbcType=CHAR},
+      </if>
+      <if test="record.imageUrl != null" >
+        image_url = #{record.imageUrl,jdbcType=CHAR},
+      </if>
+      <if test="record.imageId != null" >
+        image_id = #{record.imageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.viewName != null" >
+        view_name = #{record.viewName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hot_view_home
+    set goods_sort_one_id = #{record.goodsSortOneId,jdbcType=INTEGER},
+      sort_one_name = #{record.sortOneName,jdbcType=CHAR},
+      goods_sort_two_id = #{record.goodsSortTwoId,jdbcType=INTEGER},
+      sort_two_name = #{record.sortTwoName,jdbcType=CHAR},
+      goods_id = #{record.goodsId,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=CHAR},
+      goods_number = #{record.goodsNumber,jdbcType=CHAR},
+      goods_sort_id = #{record.goodsSortId,jdbcType=INTEGER},
+      sale_total = #{record.saleTotal,jdbcType=INTEGER},
+      visit_num = #{record.visitNum,jdbcType=INTEGER},
+      image_desc = #{record.imageDesc,jdbcType=CHAR},
+      image_url = #{record.imageUrl,jdbcType=CHAR},
+      image_id = #{record.imageId,jdbcType=BIGINT},
+      view_name = #{record.viewName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -805,52 +805,52 @@ public class GoodsExample {
             return (Criteria) this;
         }
 
-        public Criteria andPriceEqualTo(Integer value) {
+        public Criteria andPriceEqualTo(Long value) {
             addCriterion("price =", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotEqualTo(Integer value) {
+        public Criteria andPriceNotEqualTo(Long value) {
             addCriterion("price <>", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThan(Integer value) {
+        public Criteria andPriceGreaterThan(Long value) {
             addCriterion("price >", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPriceGreaterThanOrEqualTo(Long value) {
             addCriterion("price >=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThan(Integer value) {
+        public Criteria andPriceLessThan(Long value) {
             addCriterion("price <", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThanOrEqualTo(Integer value) {
+        public Criteria andPriceLessThanOrEqualTo(Long value) {
             addCriterion("price <=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIn(List<Integer> values) {
+        public Criteria andPriceIn(List<Long> values) {
             addCriterion("price in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotIn(List<Integer> values) {
+        public Criteria andPriceNotIn(List<Long> values) {
             addCriterion("price not in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceBetween(Integer value1, Integer value2) {
+        public Criteria andPriceBetween(Long value1, Long value2) {
             addCriterion("price between", value1, value2, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotBetween(Integer value1, Integer value2) {
+        public Criteria andPriceNotBetween(Long value1, Long value2) {
             addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }
@@ -1032,6 +1032,76 @@ public class GoodsExample {
 
         public Criteria andCreateDateNotBetween(Date value1, Date value2) {
             addCriterion("create_date not between", value1, value2, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIsNull() {
+            addCriterion("spec is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIsNotNull() {
+            addCriterion("spec is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecEqualTo(String value) {
+            addCriterion("spec =", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNotEqualTo(String value) {
+            addCriterion("spec <>", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecGreaterThan(String value) {
+            addCriterion("spec >", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecGreaterThanOrEqualTo(String value) {
+            addCriterion("spec >=", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecLessThan(String value) {
+            addCriterion("spec <", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecLessThanOrEqualTo(String value) {
+            addCriterion("spec <=", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecLike(String value) {
+            addCriterion("spec like", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNotLike(String value) {
+            addCriterion("spec not like", value, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecIn(List<String> values) {
+            addCriterion("spec in", values, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNotIn(List<String> values) {
+            addCriterion("spec not in", values, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecBetween(String value1, String value2) {
+            addCriterion("spec between", value1, value2, "spec");
+            return (Criteria) this;
+        }
+
+        public Criteria andSpecNotBetween(String value1, String value2) {
+            addCriterion("spec not between", value1, value2, "spec");
             return (Criteria) this;
         }
     }
