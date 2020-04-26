@@ -10,7 +10,7 @@ public interface ShoppingCartMapper {
 
     int deleteByExample(ShoppingCartExample example);
 
-    int deleteByPrimaryKey(Long userId);
+    int deleteByPrimaryKey(Long id);
 
     int insert(ShoppingCart record);
 
@@ -18,7 +18,7 @@ public interface ShoppingCartMapper {
 
     List<ShoppingCart> selectByExample(ShoppingCartExample example);
 
-    ShoppingCart selectByPrimaryKey(Long userId);
+    ShoppingCart selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") ShoppingCart record, @Param("example") ShoppingCartExample example);
 

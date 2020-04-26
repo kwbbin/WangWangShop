@@ -1,41 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wangwang.shop.dao.HotViewHomeMapper" >
-  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.HotViewHome" >
-    <result column="goods_sort_one_id" property="goodsSortOneId" jdbcType="INTEGER" />
-    <result column="sort_one_name" property="sortOneName" jdbcType="CHAR" />
-    <result column="goods_sort_two_id" property="goodsSortTwoId" jdbcType="INTEGER" />
-    <result column="sort_two_name" property="sortTwoName" jdbcType="CHAR" />
-    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="CHAR" />
-    <result column="goods_number" property="goodsNumber" jdbcType="CHAR" />
-    <result column="goods_sort_id" property="goodsSortId" jdbcType="INTEGER" />
-    <result column="sale_total" property="saleTotal" jdbcType="INTEGER" />
-    <result column="visit_num" property="visitNum" jdbcType="INTEGER" />
-    <result column="image_desc" property="imageDesc" jdbcType="CHAR" />
-    <result column="image_url" property="imageUrl" jdbcType="CHAR" />
-    <result column="image_id" property="imageId" jdbcType="BIGINT" />
-    <result column="view_name" property="viewName" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangwang.shop.dao.HotViewHomeMapper">
+  <resultMap id="BaseResultMap" type="com.wangwang.shop.bean.HotViewHome">
+    <result column="goods_sort_one_id" jdbcType="INTEGER" property="goodsSortOneId" />
+    <result column="sort_one_name" jdbcType="CHAR" property="sortOneName" />
+    <result column="goods_sort_two_id" jdbcType="INTEGER" property="goodsSortTwoId" />
+    <result column="sort_two_name" jdbcType="CHAR" property="sortTwoName" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="goods_number" jdbcType="CHAR" property="goodsNumber" />
+    <result column="goods_sort_id" jdbcType="INTEGER" property="goodsSortId" />
+    <result column="sale_total" jdbcType="INTEGER" property="saleTotal" />
+    <result column="visit_num" jdbcType="INTEGER" property="visitNum" />
+    <result column="goods_desc" jdbcType="CHAR" property="goodsDesc" />
+    <result column="image_desc" jdbcType="CHAR" property="imageDesc" />
+    <result column="image_url" jdbcType="CHAR" property="imageUrl" />
+    <result column="image_id" jdbcType="BIGINT" property="imageId" />
+    <result column="view_name" jdbcType="VARCHAR" property="viewName" />
+    <result column="is_sale" jdbcType="INTEGER" property="isSale" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -46,25 +48,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -75,191 +77,211 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     goods_sort_one_id, sort_one_name, goods_sort_two_id, sort_two_name, goods_id, name, 
-    goods_number, goods_sort_id, sale_total, visit_num, image_desc, image_url, image_id, 
-    view_name
+    goods_number, goods_sort_id, sale_total, visit_num, goods_desc, image_desc, image_url, 
+    image_id, view_name, is_sale
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wangwang.shop.bean.HotViewHomeExample" >
+  <select id="selectByExample" parameterType="com.wangwang.shop.bean.HotViewHomeExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from hot_view_home
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.HotViewHomeExample" >
+  <delete id="deleteByExample" parameterType="com.wangwang.shop.bean.HotViewHomeExample">
     delete from hot_view_home
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.wangwang.shop.bean.HotViewHome" >
+  <insert id="insert" parameterType="com.wangwang.shop.bean.HotViewHome">
     insert into hot_view_home (goods_sort_one_id, sort_one_name, goods_sort_two_id, 
       sort_two_name, goods_id, name, 
       goods_number, goods_sort_id, sale_total, 
-      visit_num, image_desc, image_url, 
-      image_id, view_name)
+      visit_num, goods_desc, image_desc, 
+      image_url, image_id, view_name, 
+      is_sale)
     values (#{goodsSortOneId,jdbcType=INTEGER}, #{sortOneName,jdbcType=CHAR}, #{goodsSortTwoId,jdbcType=INTEGER}, 
       #{sortTwoName,jdbcType=CHAR}, #{goodsId,jdbcType=BIGINT}, #{name,jdbcType=CHAR}, 
       #{goodsNumber,jdbcType=CHAR}, #{goodsSortId,jdbcType=INTEGER}, #{saleTotal,jdbcType=INTEGER}, 
-      #{visitNum,jdbcType=INTEGER}, #{imageDesc,jdbcType=CHAR}, #{imageUrl,jdbcType=CHAR}, 
-      #{imageId,jdbcType=BIGINT}, #{viewName,jdbcType=VARCHAR})
+      #{visitNum,jdbcType=INTEGER}, #{goodsDesc,jdbcType=CHAR}, #{imageDesc,jdbcType=CHAR}, 
+      #{imageUrl,jdbcType=CHAR}, #{imageId,jdbcType=BIGINT}, #{viewName,jdbcType=VARCHAR}, 
+      #{isSale,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.HotViewHome" >
+  <insert id="insertSelective" parameterType="com.wangwang.shop.bean.HotViewHome">
     insert into hot_view_home
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsSortOneId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsSortOneId != null">
         goods_sort_one_id,
       </if>
-      <if test="sortOneName != null" >
+      <if test="sortOneName != null">
         sort_one_name,
       </if>
-      <if test="goodsSortTwoId != null" >
+      <if test="goodsSortTwoId != null">
         goods_sort_two_id,
       </if>
-      <if test="sortTwoName != null" >
+      <if test="sortTwoName != null">
         sort_two_name,
       </if>
-      <if test="goodsId != null" >
+      <if test="goodsId != null">
         goods_id,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="goodsNumber != null" >
+      <if test="goodsNumber != null">
         goods_number,
       </if>
-      <if test="goodsSortId != null" >
+      <if test="goodsSortId != null">
         goods_sort_id,
       </if>
-      <if test="saleTotal != null" >
+      <if test="saleTotal != null">
         sale_total,
       </if>
-      <if test="visitNum != null" >
+      <if test="visitNum != null">
         visit_num,
       </if>
-      <if test="imageDesc != null" >
+      <if test="goodsDesc != null">
+        goods_desc,
+      </if>
+      <if test="imageDesc != null">
         image_desc,
       </if>
-      <if test="imageUrl != null" >
+      <if test="imageUrl != null">
         image_url,
       </if>
-      <if test="imageId != null" >
+      <if test="imageId != null">
         image_id,
       </if>
-      <if test="viewName != null" >
+      <if test="viewName != null">
         view_name,
       </if>
+      <if test="isSale != null">
+        is_sale,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsSortOneId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsSortOneId != null">
         #{goodsSortOneId,jdbcType=INTEGER},
       </if>
-      <if test="sortOneName != null" >
+      <if test="sortOneName != null">
         #{sortOneName,jdbcType=CHAR},
       </if>
-      <if test="goodsSortTwoId != null" >
+      <if test="goodsSortTwoId != null">
         #{goodsSortTwoId,jdbcType=INTEGER},
       </if>
-      <if test="sortTwoName != null" >
+      <if test="sortTwoName != null">
         #{sortTwoName,jdbcType=CHAR},
       </if>
-      <if test="goodsId != null" >
+      <if test="goodsId != null">
         #{goodsId,jdbcType=BIGINT},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=CHAR},
       </if>
-      <if test="goodsNumber != null" >
+      <if test="goodsNumber != null">
         #{goodsNumber,jdbcType=CHAR},
       </if>
-      <if test="goodsSortId != null" >
+      <if test="goodsSortId != null">
         #{goodsSortId,jdbcType=INTEGER},
       </if>
-      <if test="saleTotal != null" >
+      <if test="saleTotal != null">
         #{saleTotal,jdbcType=INTEGER},
       </if>
-      <if test="visitNum != null" >
+      <if test="visitNum != null">
         #{visitNum,jdbcType=INTEGER},
       </if>
-      <if test="imageDesc != null" >
+      <if test="goodsDesc != null">
+        #{goodsDesc,jdbcType=CHAR},
+      </if>
+      <if test="imageDesc != null">
         #{imageDesc,jdbcType=CHAR},
       </if>
-      <if test="imageUrl != null" >
+      <if test="imageUrl != null">
         #{imageUrl,jdbcType=CHAR},
       </if>
-      <if test="imageId != null" >
+      <if test="imageId != null">
         #{imageId,jdbcType=BIGINT},
       </if>
-      <if test="viewName != null" >
+      <if test="viewName != null">
         #{viewName,jdbcType=VARCHAR},
+      </if>
+      <if test="isSale != null">
+        #{isSale,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.wangwang.shop.bean.HotViewHomeExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.wangwang.shop.bean.HotViewHomeExample" resultType="java.lang.Integer">
     select count(*) from hot_view_home
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update hot_view_home
-    <set >
-      <if test="record.goodsSortOneId != null" >
+    <set>
+      <if test="record.goodsSortOneId != null">
         goods_sort_one_id = #{record.goodsSortOneId,jdbcType=INTEGER},
       </if>
-      <if test="record.sortOneName != null" >
+      <if test="record.sortOneName != null">
         sort_one_name = #{record.sortOneName,jdbcType=CHAR},
       </if>
-      <if test="record.goodsSortTwoId != null" >
+      <if test="record.goodsSortTwoId != null">
         goods_sort_two_id = #{record.goodsSortTwoId,jdbcType=INTEGER},
       </if>
-      <if test="record.sortTwoName != null" >
+      <if test="record.sortTwoName != null">
         sort_two_name = #{record.sortTwoName,jdbcType=CHAR},
       </if>
-      <if test="record.goodsId != null" >
+      <if test="record.goodsId != null">
         goods_id = #{record.goodsId,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null" >
+      <if test="record.name != null">
         name = #{record.name,jdbcType=CHAR},
       </if>
-      <if test="record.goodsNumber != null" >
+      <if test="record.goodsNumber != null">
         goods_number = #{record.goodsNumber,jdbcType=CHAR},
       </if>
-      <if test="record.goodsSortId != null" >
+      <if test="record.goodsSortId != null">
         goods_sort_id = #{record.goodsSortId,jdbcType=INTEGER},
       </if>
-      <if test="record.saleTotal != null" >
+      <if test="record.saleTotal != null">
         sale_total = #{record.saleTotal,jdbcType=INTEGER},
       </if>
-      <if test="record.visitNum != null" >
+      <if test="record.visitNum != null">
         visit_num = #{record.visitNum,jdbcType=INTEGER},
       </if>
-      <if test="record.imageDesc != null" >
+      <if test="record.goodsDesc != null">
+        goods_desc = #{record.goodsDesc,jdbcType=CHAR},
+      </if>
+      <if test="record.imageDesc != null">
         image_desc = #{record.imageDesc,jdbcType=CHAR},
       </if>
-      <if test="record.imageUrl != null" >
+      <if test="record.imageUrl != null">
         image_url = #{record.imageUrl,jdbcType=CHAR},
       </if>
-      <if test="record.imageId != null" >
+      <if test="record.imageId != null">
         image_id = #{record.imageId,jdbcType=BIGINT},
       </if>
-      <if test="record.viewName != null" >
+      <if test="record.viewName != null">
         view_name = #{record.viewName,jdbcType=VARCHAR},
       </if>
+      <if test="record.isSale != null">
+        is_sale = #{record.isSale,jdbcType=INTEGER},
+      </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update hot_view_home
     set goods_sort_one_id = #{record.goodsSortOneId,jdbcType=INTEGER},
       sort_one_name = #{record.sortOneName,jdbcType=CHAR},
@@ -271,12 +293,15 @@
       goods_sort_id = #{record.goodsSortId,jdbcType=INTEGER},
       sale_total = #{record.saleTotal,jdbcType=INTEGER},
       visit_num = #{record.visitNum,jdbcType=INTEGER},
+      goods_desc = #{record.goodsDesc,jdbcType=CHAR},
       image_desc = #{record.imageDesc,jdbcType=CHAR},
       image_url = #{record.imageUrl,jdbcType=CHAR},
       image_id = #{record.imageId,jdbcType=BIGINT},
-      view_name = #{record.viewName,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
+      view_name = #{record.viewName,jdbcType=VARCHAR},
+      is_sale = #{record.isSale,jdbcType=INTEGER}
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
 </mapper>

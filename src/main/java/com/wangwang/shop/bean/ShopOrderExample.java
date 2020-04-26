@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderExample {
+public class ShopOrderExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OrderExample() {
+    public ShopOrderExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -415,52 +415,62 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumEqualTo(Integer value) {
+        public Criteria andGoodsNumEqualTo(String value) {
             addCriterion("goods_num =", value, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumNotEqualTo(Integer value) {
+        public Criteria andGoodsNumNotEqualTo(String value) {
             addCriterion("goods_num <>", value, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumGreaterThan(Integer value) {
+        public Criteria andGoodsNumGreaterThan(String value) {
             addCriterion("goods_num >", value, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumGreaterThanOrEqualTo(Integer value) {
+        public Criteria andGoodsNumGreaterThanOrEqualTo(String value) {
             addCriterion("goods_num >=", value, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumLessThan(Integer value) {
+        public Criteria andGoodsNumLessThan(String value) {
             addCriterion("goods_num <", value, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumLessThanOrEqualTo(Integer value) {
+        public Criteria andGoodsNumLessThanOrEqualTo(String value) {
             addCriterion("goods_num <=", value, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumIn(List<Integer> values) {
+        public Criteria andGoodsNumLike(String value) {
+            addCriterion("goods_num like", value, "goodsNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsNumNotLike(String value) {
+            addCriterion("goods_num not like", value, "goodsNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsNumIn(List<String> values) {
             addCriterion("goods_num in", values, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumNotIn(List<Integer> values) {
+        public Criteria andGoodsNumNotIn(List<String> values) {
             addCriterion("goods_num not in", values, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumBetween(Integer value1, Integer value2) {
+        public Criteria andGoodsNumBetween(String value1, String value2) {
             addCriterion("goods_num between", value1, value2, "goodsNum");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNumNotBetween(Integer value1, Integer value2) {
+        public Criteria andGoodsNumNotBetween(String value1, String value2) {
             addCriterion("goods_num not between", value1, value2, "goodsNum");
             return (Criteria) this;
         }
@@ -642,6 +652,66 @@ public class OrderExample {
 
         public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdIsNull() {
+            addCriterion("position_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdIsNotNull() {
+            addCriterion("position_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdEqualTo(Long value) {
+            addCriterion("position_id =", value, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdNotEqualTo(Long value) {
+            addCriterion("position_id <>", value, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdGreaterThan(Long value) {
+            addCriterion("position_id >", value, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("position_id >=", value, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdLessThan(Long value) {
+            addCriterion("position_id <", value, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdLessThanOrEqualTo(Long value) {
+            addCriterion("position_id <=", value, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdIn(List<Long> values) {
+            addCriterion("position_id in", values, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdNotIn(List<Long> values) {
+            addCriterion("position_id not in", values, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdBetween(Long value1, Long value2) {
+            addCriterion("position_id between", value1, value2, "positionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIdNotBetween(Long value1, Long value2) {
+            addCriterion("position_id not between", value1, value2, "positionId");
             return (Criteria) this;
         }
     }

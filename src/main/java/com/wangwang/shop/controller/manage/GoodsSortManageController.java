@@ -1,9 +1,6 @@
 package com.wangwang.shop.controller.manage;
 
-import com.wangwang.shop.bean.GoodsSortOne;
-import com.wangwang.shop.bean.GoodsSortTwo;
-import com.wangwang.shop.bean.ResultBean;
-import com.wangwang.shop.bean.SortAll;
+import com.wangwang.shop.bean.*;
 import com.wangwang.shop.bean.VO.SortAllVo;
 import com.wangwang.shop.dao.default_dao.GoodsSortOneDao;
 import com.wangwang.shop.dao.default_dao.GoodsSortTwoDao;
@@ -27,11 +24,17 @@ public class GoodsSortManageController {
     @Autowired
     GoodsSortTwoDao goodsSortTwoDao;
 
+
     @RequestMapping("/sortOneAll")
     public ResultBean<GoodsSortOne> getSortOneAll(){
         List<GoodsSortOne> list = goodsSortOneDao.findAll();
         ResultBean<GoodsSortOne> result = new ResultBean(0,"获取成功",list);
         return result;
+    }
+
+    @RequestMapping("/getAllSortOneNotInViewSort")
+    public ResultBean<List<GoodsSortOne>> getAllSortOneNotInViewSort(){
+        return goodsSortService.getAllSortOneNotInViewSort();
     }
 
     /**
@@ -97,4 +100,19 @@ public class GoodsSortManageController {
         return null;
     }
 
+
+    @RequestMapping("/getAllViewSort")
+    public ResultBean<List<ViewSort>> getAllViewSort(){
+        return goodsSortService.getAllViewSort();
+    }
+
+    @RequestMapping("/addViewSort")
+    public ResultBean<String> addViewSort(@RequestBody ViewSort viewSort){
+        return goodsSortService.addViewSort(viewSort);
+    }
+
+    @RequestMapping("/removeViewSortById")
+    public ResultBean<String> removeViewSortById(@RequestBody ViewSort viewSort){
+        return goodsSortService.removeViewSortById(viewSort.getGoodsSortOne());
+    }
 }

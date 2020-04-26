@@ -2,7 +2,7 @@ package com.wangwang.shop.bean;
 
 import java.util.Date;
 
-public class Order {
+public class ShopOrder {
     private Long orderId;
 
     private Date createDate;
@@ -13,13 +13,15 @@ public class Order {
 
     private Double totalPrice;
 
-    private Integer goodsNum;
+    private String goodsNum;
 
     private Long goodsId;
 
     private Long userId;
 
     private Integer status;
+
+    private Long positionId;
 
     public Long getOrderId() {
         return orderId;
@@ -61,12 +63,12 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getGoodsNum() {
+    public String getGoodsNum() {
         return goodsNum;
     }
 
-    public void setGoodsNum(Integer goodsNum) {
-        this.goodsNum = goodsNum;
+    public void setGoodsNum(String goodsNum) {
+        this.goodsNum = goodsNum == null ? null : goodsNum.trim();
     }
 
     public Long getGoodsId() {
@@ -91,5 +93,13 @@ public class Order {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Long getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(Long positionId) {
+        this.positionId = positionId;
     }
 }

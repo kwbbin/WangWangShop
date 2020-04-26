@@ -1,7 +1,12 @@
 package com.wangwang.shop.controller;
 
 import com.wangwang.shop.bean.ResultBean;
+import com.wangwang.shop.bean.User;
+import com.wangwang.shop.bean.UserPosition;
+import com.wangwang.shop.bean.VO.UserPasswordVo;
 import com.wangwang.shop.bean.VO.UserVo;
+import com.wangwang.shop.bean.region.City;
+import com.wangwang.shop.service.RegionService;
 import com.wangwang.shop.service.UserService;
 import com.wangwang.shop.utils.MD5Tools;
 import com.wangwang.shop.utils.StringUtils;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -25,6 +31,9 @@ public class UserController extends BaseController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RegionService regionService;
 
     @PostMapping("/reginster")
     @ApiOperation(value="注册", notes="注册")
@@ -64,5 +73,62 @@ public class UserController extends BaseController {
         return success("注册成功！请登录");
     }
 
+    @RequestMapping("/getProvince")
+    @ResponseBody
+    public ResultBean<List<City>> getProvince(){
+        return regionService.getProvince();
+    }
+
+    @RequestMapping("/getCityById")
+    @ResponseBody
+    public ResultBean<List<City>> getCityById(@RequestBody String id){
+        return regionService.getCitysByFather(id);
+    }
+
+
+
+    @RequestMapping("/getUserPositionByiUid")
+    @ResponseBody
+    public ResultBean<List<UserPosition>> getUserPositionByiUid(@RequestBody Long id){
+        return null;
+    }
+
+
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public ResultBean<User>  getUserInfo(HttpServletRequest request){
+        return userService.getUserInfo(request);
+    }
+
+    @RequestMapping("/updateUserInfo")
+    @ResponseBody
+    public ResultBean<String> updateUserInfo(@RequestBody User user,HttpServletRequest request){
+        return userService.updateUserInfo(user,request);
+    }
+
+
+    @RequestMapping("/updateUserPass")
+    @ResponseBody
+    public ResultBean<String> updateUserPass(@RequestBody UserPasswordVo upv, HttpServletRequest request){
+        return userService.updateUserPassword(upv,request);
+    }
+
+    @RequestMapping("/addUserPosition")
+    @ResponseBody
+    public ResultBean<String> addUserPosition(@RequestBody UserPosition userPosition,HttpServletRequest request){
+        return userService.addUserPosition(userPosition,request);
+    }
+
+    @RequestMapping("/selectUserPosition")
+    @ResponseBody
+    public ResultBean<List<UserPosition>> selectUserPosition(HttpServletRequest request){
+        return userService.selectUserPosition(request);
+    }
+
+    @RequestMapping("/deleteUserPositionById")
+    @ResponseBody
+    public ResultBean<String> deleteUserPositionById(@RequestBody UserPosition userPosition){
+        return userService.deleteUserPositionById(userPosition.getId());
+    }
 
 }

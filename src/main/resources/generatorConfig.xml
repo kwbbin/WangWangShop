@@ -71,9 +71,17 @@
 <!--        <table tableName="goods_sort_two" domainObjectName="GoodsSortTwo"/>-->
 <!--        <table tableName="images" domainObjectName="Images"/>-->
 <!--        <table tableName="images_goods" domainObjectName="ImagesGoods"/>-->
-<!--        <table tableName="message" domainObjectName="Message"/>-->
+<!--            <table tableName="goods_images" domainObjectName="GoodsImages"/>-->
+        <!--        <table tableName="message" domainObjectName="Message"/>-->
+<!--                <table tableName="user_position" domainObjectName="UserPosition"/>-->
 <!--        <table tableName="message_images" domainObjectName="MessageImages"/>-->
-<!--        <table tableName="order" domainObjectName="Order"/>-->
+<!--        <table tableName="shop_order" domainObjectName="ShopOrder" enableCountByExample="true" enableUpdateByExample="true"-->
+<!--               enableDeleteByExample="true" enableSelectByExample="true" enableDeleteByPrimaryKey="true" >-->
+<!--            &lt;!&ndash;指定主键，插入时自动返回主键&ndash;&gt;-->
+<!--            <generatedKey column="order_id" sqlStatement="JDBC" identity="true"></generatedKey>-->
+<!--        </table>-->
+<!--        <table tableName="view_sort" domainObjectName="ViewSort"/>-->
+<!--        <table tableName="shop_notice" domainObjectName="Notice"/>-->
 <!--        <table tableName="shop" domainObjectName="Shop"/>-->
 <!--        <table tableName="shopping_cart" domainObjectName="ShoppingCart"/>-->
 <!--        <table tableName="user" domainObjectName="User"/>-->

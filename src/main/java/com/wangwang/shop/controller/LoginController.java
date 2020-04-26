@@ -52,15 +52,15 @@ public class LoginController extends BaseController {
     public ResultBean<User> getClientUser(HttpServletRequest request){
         ResultBean<User> resultBean = new ResultBean<>();
         User user = userService.getUserByToken(request.getHeader("token"));
-        System.out.println("user "+user);
         String token = request.getHeader("token");
-        if(token != null && token != ""){
+        if(user != null ){
+            user.setPassword(null);
             resultBean.setData(user);
             resultBean.setMessage("获取成功");
             resultBean.setCode(0);
         }
         else{
-            resultBean.setMessage("获取失败");
+            resultBean.setMessage("获取失败，用户未登录");
             resultBean.setCode(1);
         }
         return resultBean;

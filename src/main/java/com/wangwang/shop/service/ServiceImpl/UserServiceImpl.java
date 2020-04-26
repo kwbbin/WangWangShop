@@ -1,9 +1,11 @@
 package com.wangwang.shop.service.ServiceImpl;
 
 import com.wangwang.shop.bean.*;
+import com.wangwang.shop.bean.VO.UserPasswordVo;
 import com.wangwang.shop.bean.VO.UserVo;
 import com.wangwang.shop.dao.SMSCodeMapper;
 import com.wangwang.shop.dao.UserMapper;
+import com.wangwang.shop.dao.UserPositionMapper;
 import com.wangwang.shop.dao.default_dao.UserDao;
 import com.wangwang.shop.service.UserLogService;
 import com.wangwang.shop.service.UserService;
@@ -34,6 +36,11 @@ public class UserServiceImpl implements UserService {
     UserService userService;
     @Autowired
     UserLogService userLogService;
+
+    @Autowired
+    UserPositionMapper userPositionMapper;
+
+
 
     @Override
     public User getUser(Long id){
@@ -199,4 +206,99 @@ public class UserServiceImpl implements UserService {
         logger.info("注销");
         return resultBean;
     }
+
+    @Override
+    public ResultBean<List<UserPosition>> getUserPositionByiUid(Long id) {
+        UserPositionExample userPositionExample = new UserPositionExample();
+        userPositionExample.createCriteria().andUidEqualTo(id);
+        List<UserPosition> list =userPositionMapper.selectByExample(userPositionExample);
+        ResultBean resultBean = new ResultBean(0,"success",list);
+        return resultBean;
+    }
+
+    public ResultBean<User>  getUserInfo(HttpServletRequest request){
+        String token = request.getHeader("token");
+        User user = getUserByToken(token);
+        user.setPassword(null);
+
+        return new ResultBean<>(0,"success",user);
+    }
+
+    @Override
+    public ResultBean<String> updateUserInfo(User user,HttpServletRequest request) {
+        try {
+            String token = request.getHeader("token");
+            User u = userService.getUserByToken(token);
+            user.setUserId(u.getUserId());
+            userMapper.updateByPrimaryKeySelective(user );
+        }catch (Exception e){
+            return new ResultBean<>(1,"faild","修改失败");
+        }
+
+        return new ResultBean<>(0,"success","成功");
+    }
+
+    @Override
+    public ResultBean<String> updateUserPassword(UserPasswordVo upv, HttpServletRequest request) {
+        String token = request.getHeader("token");
+        String userLoginName = getUserByToken(token).getLoginName();
+        if(upv.getNewPass()==null||upv.getOldPass()==null||upv.getNewPassAgain()==null){
+            return new ResultBean<>(1,"faile","数据不完整");
+        }
+
+        if(!upv.getNewPassAgain().equals(upv.getNewPass())){
+            return new ResultBean<>(1,"faile","两次输入密码不一致");
+        }else if(upv.getNewPassAgain().equals(upv.getOldPass())){
+            return new ResultBean<>(1,"faile","新旧密码不能一样");
+        }else{
+            String newPassword = MD5Tools.string2MD5(upv.getNewPass());
+            User user = getUserByLoginNamePas(userLoginName,upv.getOldPass());
+            System.out.println(upv.getOldPass());
+            System.out.println(user);
+            if (user!=null){
+                User u = new User();
+                u.setUserId(user.getUserId());
+                u.setPassword(newPassword);
+                userMapper.updateByPrimaryKeySelective(u);
+                return new ResultBean<>(0,"success","修改成功");
+            }else {
+                return new ResultBean<>(1,"faile","密码错误");
+            }
+        }
+    }
+
+    @Override
+    public ResultBean<String> addUserPosition(UserPosition userPosition,HttpServletRequest request) {
+        try {
+            String token = request.getHeader("token");
+            User user = userService.getUserByToken(token);
+            userPosition.setUid(user.getUserId());
+            userPositionMapper.insert(userPosition);
+        }catch (Exception e){
+            return new ResultBean<>(1,"faile ","保存失败");
+        }
+        return  new ResultBean<>(0,"success ","保存成功");
+    }
+
+    @Override
+    public ResultBean<List<UserPosition>> selectUserPosition(HttpServletRequest request) {
+        List<UserPosition> list=null;
+        try {
+            String token = request.getHeader("token");
+            User user = userService.getUserByToken(token);
+            list = userPositionMapper.selectByExample(new UserPositionExample());
+        }catch (Exception e){
+            return new ResultBean<>(1,"faile ",null);
+        }
+        return  new ResultBean<>(0,"success ",list);
+    }
+
+    @Override
+    public ResultBean<String> deleteUserPositionById(Long id) {
+        userPositionMapper.deleteByPrimaryKey(id);
+        return new ResultBean<>(0,"success","删除成功");
+
+    }
+
+
 }

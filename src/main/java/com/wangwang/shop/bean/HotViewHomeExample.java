@@ -744,6 +744,76 @@ public class HotViewHomeExample {
             return (Criteria) this;
         }
 
+        public Criteria andGoodsDescIsNull() {
+            addCriterion("goods_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescIsNotNull() {
+            addCriterion("goods_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescEqualTo(String value) {
+            addCriterion("goods_desc =", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescNotEqualTo(String value) {
+            addCriterion("goods_desc <>", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescGreaterThan(String value) {
+            addCriterion("goods_desc >", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescGreaterThanOrEqualTo(String value) {
+            addCriterion("goods_desc >=", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescLessThan(String value) {
+            addCriterion("goods_desc <", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescLessThanOrEqualTo(String value) {
+            addCriterion("goods_desc <=", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescLike(String value) {
+            addCriterion("goods_desc like", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescNotLike(String value) {
+            addCriterion("goods_desc not like", value, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescIn(List<String> values) {
+            addCriterion("goods_desc in", values, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescNotIn(List<String> values) {
+            addCriterion("goods_desc not in", values, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescBetween(String value1, String value2) {
+            addCriterion("goods_desc between", value1, value2, "goodsDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsDescNotBetween(String value1, String value2) {
+            addCriterion("goods_desc not between", value1, value2, "goodsDesc");
+            return (Criteria) this;
+        }
+
         public Criteria andImageDescIsNull() {
             addCriterion("image_desc is null");
             return (Criteria) this;
@@ -1011,6 +1081,66 @@ public class HotViewHomeExample {
 
         public Criteria andViewNameNotBetween(String value1, String value2) {
             addCriterion("view_name not between", value1, value2, "viewName");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleIsNull() {
+            addCriterion("is_sale is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleIsNotNull() {
+            addCriterion("is_sale is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleEqualTo(Integer value) {
+            addCriterion("is_sale =", value, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleNotEqualTo(Integer value) {
+            addCriterion("is_sale <>", value, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleGreaterThan(Integer value) {
+            addCriterion("is_sale >", value, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_sale >=", value, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleLessThan(Integer value) {
+            addCriterion("is_sale <", value, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleLessThanOrEqualTo(Integer value) {
+            addCriterion("is_sale <=", value, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleIn(List<Integer> values) {
+            addCriterion("is_sale in", values, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleNotIn(List<Integer> values) {
+            addCriterion("is_sale not in", values, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleBetween(Integer value1, Integer value2) {
+            addCriterion("is_sale between", value1, value2, "isSale");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSaleNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_sale not between", value1, value2, "isSale");
             return (Criteria) this;
         }
     }

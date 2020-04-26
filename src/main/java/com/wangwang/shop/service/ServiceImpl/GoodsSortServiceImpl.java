@@ -2,6 +2,7 @@ package com.wangwang.shop.service.ServiceImpl;
 
 import com.wangwang.shop.bean.*;
 import com.wangwang.shop.bean.VO.SortAllVo;
+import com.wangwang.shop.dao.ViewSortMapper;
 import com.wangwang.shop.dao.default_dao.GoodsSortAllDao;
 import com.wangwang.shop.dao.default_dao.GoodsSortOneDao;
 import com.wangwang.shop.dao.default_dao.GoodsSortOneTwoDao;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class GoodsShortServiceImpl implements GoodsSortService {
+public class GoodsSortServiceImpl implements GoodsSortService {
 
     @Autowired
     GoodsSortOneDao goodsSortOneDao;
@@ -26,6 +27,10 @@ public class GoodsShortServiceImpl implements GoodsSortService {
 
     @Autowired
     GoodsSortAllDao goodsSortAllDao;
+
+
+    @Autowired
+    ViewSortMapper viewSortMapper;
 
     public ResultBean<Map<String, List<String>>> getGoodsSortAll(){
         List<SortAll> gsAll = goodsSortAllDao.findAll();
@@ -184,4 +189,71 @@ public class GoodsShortServiceImpl implements GoodsSortService {
         resultBean.setData(list2);
         return resultBean;
     }
+
+    @Override
+    public ResultBean<Map<String, List<SortAll>>> getSortAllDetail() {
+        List<SortAll> gsAll = goodsSortAllDao.findAll();
+        Map<String, List<GoodsSortTwo>> map = new LinkedHashMap<>();
+        Set set = new HashSet();
+        String item="";
+
+        //转换数据格式
+        for (SortAll sa : gsAll){
+            set.add(sa.getSortOne());
+        }
+        Iterator<String> it = set.iterator();
+        while (it.hasNext()) {
+            List list = new ArrayList();
+            String sortOne = it.next();
+            for (SortAll sa : gsAll){
+                if(sa.getSortOne().equals(sortOne) ){
+                    list.add(sa);
+                }
+            }
+            map.put(sortOne,list);
+        }
+
+        ResultBean<Map<String, List<SortAll>>> resultBean = new ResultBean(0,"请求成功！",map);
+        return resultBean;
+    }
+
+    @Override
+    public ResultBean<List<ViewSort>> getAllViewSort() {
+        List<ViewSort> list = viewSortMapper.selectByExample(new ViewSortExample());
+        return new ResultBean<>(0,"success",list);
+    }
+
+    @Override
+    public ResultBean<List<GoodsSortOne>> getAllSortOneNotInViewSort() {
+        List<GoodsSortOne> listOne = goodsSortOneDao.findAll();
+        List<ViewSort> listVS = viewSortMapper.selectByExample(new ViewSortExample());
+        List<GoodsSortOne> l = new ArrayList<>();
+        for(ViewSort vs :listVS){
+            for (GoodsSortOne gso :listOne){
+                if(gso.getGoodsSortOneId() ==vs.getGoodsSortOne()){
+                    l.add(gso);
+                }
+            }
+        }
+        for(GoodsSortOne gs : l){
+            listOne.remove(gs);
+        }
+        return new ResultBean<List<GoodsSortOne>>(0,"success",listOne);
+    }
+
+    @Override
+    public ResultBean<String> addViewSort(ViewSort viewSort) {
+        GoodsSortOne goodsSortOne = goodsSortOneDao.getByGoodsSortOneId(viewSort.getGoodsSortOne());
+        viewSort.setViewName(goodsSortOne.getSortName());
+        viewSortMapper.insert(viewSort);
+        return new ResultBean<>(0,"success","添加成功");
+    }
+
+    @Override
+    public ResultBean<String> removeViewSortById(Integer id) {
+        viewSortMapper.deleteByPrimaryKey(id);
+        return new ResultBean<>(0,"success","删除成功");
+    }
+
+
 }

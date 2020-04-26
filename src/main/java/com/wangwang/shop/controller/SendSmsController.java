@@ -47,7 +47,7 @@ public class SendSmsController extends BaseController {
         };
 
 
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "****", "***");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FnkQAHaYjL32F7iXdpH", "Dl5LatefZA37azRGb7JWHqBBbvbzXi");
         IAcsClient client = new DefaultAcsClient(profile);
 
         CommonRequest request = new CommonRequest();

@@ -1,8 +1,6 @@
 package com.wangwang.shop.service;
 
-import com.wangwang.shop.bean.GoodsSortTwo;
-import com.wangwang.shop.bean.ResultBean;
-import com.wangwang.shop.bean.SortAll;
+import com.wangwang.shop.bean.*;
 import com.wangwang.shop.bean.VO.SortAllVo;
 
 import java.util.List;
@@ -15,4 +13,11 @@ public interface GoodsSortService {
     ResultBean<String> updateSortAll(SortAll sortAll);
     ResultBean updateSortHot(Integer id);
     ResultBean<List<GoodsSortTwo>> getAllSortTwoByOneId(Integer id);
+    ResultBean<Map<String, List<SortAll>>> getSortAllDetail();
+    ResultBean<List<ViewSort>> getAllViewSort();
+    ResultBean<List<GoodsSortOne>> getAllSortOneNotInViewSort();
+    ResultBean<String> addViewSort(ViewSort viewSort);
+    ResultBean<String> removeViewSortById(Integer id);
+
+
 }

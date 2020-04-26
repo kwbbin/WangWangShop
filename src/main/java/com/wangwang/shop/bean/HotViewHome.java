@@ -21,6 +21,8 @@ public class HotViewHome {
 
     private Integer visitNum;
 
+    private String goodsDesc;
+
     private String imageDesc;
 
     private String imageUrl;
@@ -28,6 +30,8 @@ public class HotViewHome {
     private Long imageId;
 
     private String viewName;
+
+    private Integer isSale;
 
     public Integer getGoodsSortOneId() {
         return goodsSortOneId;
@@ -109,6 +113,14 @@ public class HotViewHome {
         this.visitNum = visitNum;
     }
 
+    public String getGoodsDesc() {
+        return goodsDesc;
+    }
+
+    public void setGoodsDesc(String goodsDesc) {
+        this.goodsDesc = goodsDesc == null ? null : goodsDesc.trim();
+    }
+
     public String getImageDesc() {
         return imageDesc;
     }
@@ -139,5 +151,13 @@ public class HotViewHome {
 
     public void setViewName(String viewName) {
         this.viewName = viewName == null ? null : viewName.trim();
+    }
+
+    public Integer getIsSale() {
+        return isSale;
+    }
+
+    public void setIsSale(Integer isSale) {
+        this.isSale = isSale;
     }
 }
