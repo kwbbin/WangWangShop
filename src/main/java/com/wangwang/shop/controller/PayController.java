@@ -23,10 +23,13 @@ import java.util.*;
 
 @Controller
 public class PayController {
-    private final String APP_ID = "2016102100733316";
-    private final String APP_PRIVATE_KEY = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQChMrFioifbRpHJzfDFC7TEiQlH/yfGqcHIbIpEIZHVY7emTUKfm29epuaRFW7iMXFYqCZfLr4rVYDjOkLh5u2NoODaWLUP8yz29KVQ707Fux3lcVfFTP5TeYGYv6fGzrsLpJVeEUQl5ltg9RGpvh7x3PUx7SMoAzczwLhWV1771+mHM/j401+rtxzTtN9HIxiKNnz1fqCmxjuE9JUvd1KKur3NDJyb2LDiHfY1UELMSpSJgr8N3LBAUnKhAnWHE9UpYLib+rGz9q0Kw0h9gtkVpAIyKHCrZadoDxDOV2v1RFlqYsyzy/eUfLD66XyB/vKZ8x0rb3LryDO8obzK3ZZ1AgMBAAECggEAe2//J8F2ddJHR1p9Odap+Snawpgf1GAf9SMwidWO//HZKu7UyrXTBY8W1hisjWdBHZu9rntzwmk6RkZR+vzEAgUkye7Nz8XuM7nJcf2eu4l67jzp8jrwMenElLyGdJXP462Hd74PClqotMlVWj8tIRaLaEzn8/bqaaX1QqCrKnvHGVsNuljtUBsjwi4kRkCnBsIXj+MZ2smtoTCkAc2njt9w+q4mpfDuSeqmgxo4HgLg2bRWwKxK2YwydElF4wj8pIkzg4BFviYNMYEs3ZfYVFA77jhntc3GjDbXs1MDcP4ORvuIYtEvw1s8QyA8yb5dZ2r8I34lm+2xcvIK69KnDQKBgQDZFnunbkXmDulP/WnLcbdDHVKjGG41Iwa6BL9dHBXJsH9cRPwjPdd7GgVUtLhDEqPM57eRuLHQTL8j0I4sxX2W1g7QLguI9op14U6cofaG6Ct9t9+woysM+Ywf8ml8Buf7PMKkQZK1D8t5DP5MyLuolV74cyolhaldspobrmaIGwKBgQC+F5ej6YMI5ykkP5NvQ6WPzEkcody4rMImti54INbo3kbzeqxY9uHseBHvnfuSYFSu2QcWZJKZMx1j5l1uJqaqZn2jvonHMvv73mQLfAfxLH5bZq3Ii3vHTmxk8c9D7moVXAV1mVNzfx8ww/rTsHPSC61uljbR2WjSJhvm4pRkrwKBgGiIwQaAvTvo1kRkXLtQiNTSm+ZZb0g7E5QjkRp+2acDTHDb7yXxM3/dqc9+LnRt115l/ik3bLhHHItcc/nvJ2iorv1kDr3nKglVcwtNmm6gAcFJ93cROzvGNslza4QDt1VtjrSVttVlQ6+IqDPFPUgSlWbB3fuvfzzVMgw+ULUdAoGBAJsJTOEf04JQXmq0+39UsdRtLfgPP6DTLeo6zf2l8wGsQDvWgnhwquSdLSu8MvE4ZfjRAwnNbw9J9B+FRBBRr77spm4FOgPgXkoXIIuJVkTqIAhV30jgEk0Edj2CRqRF7/mJut4l9j0Nohe4z3sVv/DBG2tFUmKmqeozsLAHfjX7AoGBAI4uWIXlxYkzSFfXW+hTTyXRfDRwp8zDBqpAcsYFfqVVW6yQ8+YbNXjS1K9zDaxMMRGhyOkq1TiFUegoW0weFSfjJHVQJ1Lh3ul9tHtmBWHggQlbROduNyn0DojBb88kgqaRbj8/pmAj75BUAxuAQpXv/7DYls3rUqcvZ0oInFzs";
+    //填写appID
+    private final String APP_ID = "*****AppId******";
+    //放上自己生成的私钥
+    private final String APP_PRIVATE_KEY = "*****私钥****";
     private final String CHARSET = "UTF-8";
-    private final String ALIPAY_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArxechXy/wkzSumcy+EwzWq/PaZTTDI9OygcQfN8pT5ehrRnG3RweuHh1YqhAcQKCF3NE39bJlZufN352uzOvI/8XE1w6ZSU0aT8q/Fej1UU0WUQ+E6QsfSa8vyxF9Mn0/EEHYw5RLDRDhyZnotC2nHxHJoeCqqxFdw1ybnyua4PtlKly1rNye2WmpM5Aw1JdCw6TNomp3UJnDw0f0Pr3txzaZ06qqDQMWkqCB1cJE/i8w3dhbb8oyEKhzHyc+9/+ohIevsxo6Li31M8QrWoigpvLeyXiS1T9bIjIR2UkkE+26R0TnwD5I1pQtC9vZYxyI12SN3EZEGOA+B4JDw2GPwIDAQAB";
+    //放上自己生成的公钥
+    private final String ALIPAY_PUBLIC_KEY = "******公钥*******";
     //这是沙箱接口路径,正式路径为https://openapi.alipay.com/gateway.do
     private final String GATEWAY_URL ="https://openapi.alipaydev.com/gateway.do";
     private final String FORMAT = "JSON";
